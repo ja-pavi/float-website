@@ -12,15 +12,15 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:       #1B1917;
-      --bg2:      #242220;
-      --bg3:      #2E2B29;
-      --border:   #3D3935;
-      --text:     #F5F1EB;
+      --bg:       #F0ECE6;
+      --bg2:      #E8E2DA;
+      --bg3:      #DDD6CC;
+      --border:   #C9BFB4;
+      --text:     #1B1917;
       --muted:    #7A726A;
-      --muted2:   #524E4A;
+      --muted2:   #9C9590;
       --gold:     #affc41;
-      --gold-dim: #5a8020;
+      --gold-dim: #7ab520;
       --green:    #3D9E6A;
       --mono:     'JetBrains Mono', monospace;
       --sans:     'Inter', sans-serif;
@@ -49,7 +49,7 @@
       justify-content: space-between;
       padding: 0 32px;
       height: 52px;
-      background: rgba(27,25,23,0.85);
+      background: rgba(240,236,230,0.85);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
     }
@@ -187,8 +187,9 @@
     /* ─── TICKER ─── */
     .ticker-wrap {
       overflow: hidden;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
+      background: #1B1917;
+      border-top: 1px solid #3D3935;
+      border-bottom: 1px solid #3D3935;
       padding: 0;
       mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
       -webkit-mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
@@ -297,10 +298,22 @@
 
     .tier-table tr.hi td:last-child { color: var(--gold); }
 
+    /* ─── DARK SECTION OVERRIDES ─── */
+    .score-card,
+    .ticker-wrap,
+    .cta {
+      --bg2:    #242220;
+      --border: #3D3935;
+      --text:   #F5F1EB;
+      --muted:  #7A726A;
+      --muted2: #524E4A;
+      color: var(--text);
+    }
+
     /* ─── CARD ─── */
     .score-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
+      background: #1B1917;
+      border: 1px solid #3D3935;
       border-radius: 16px;
       padding: 28px;
     }
@@ -577,6 +590,8 @@
       text-align: center;
       max-width: 600px;
       margin: 0 auto;
+      background: #1B1917;
+      border-radius: 16px;
     }
 
     .cta h2 {
