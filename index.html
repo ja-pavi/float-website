@@ -997,13 +997,24 @@
 </footer>
 
 <script>
-  function submitWaitlist(src) {
+  async function submitWaitlist(src) {
     const id = src === 'hero' ? 'hero-email' : 'cta-input';
-    const email = document.getElementById(id).value;
+    const input = document.getElementById(id);
+    const email = input.value.trim();
     if (!email || !email.includes('@')) {
-      document.getElementById(id).style.borderColor = '#E05F5F';
+      input.style.borderColor = '#E05F5F';
       return;
     }
+    try {
+      await fetch('https://app.loops.so/api/v1/contacts/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer REDACTED'
+        },
+        body: JSON.stringify({ email, source: 'waitlist' })
+      });
+    } catch (e) {}
     if (src === 'hero') {
       document.getElementById('hero-form').style.display = 'none';
       document.getElementById('hero-success').style.display = 'block';
@@ -1011,7 +1022,6 @@
       document.getElementById('cta-form').style.display = 'none';
       document.getElementById('cta-success').style.display = 'block';
     }
-    console.log('Waitlist:', email);
   }
 
   ['hero-email', 'cta-input'].forEach(id => {
