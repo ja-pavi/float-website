@@ -497,6 +497,162 @@
     .c-dec     { color: var(--green); }
     .c-text    { color: var(--text); }
 
+    /* ─── DASHBOARD ─── */
+    .dashboard-section {
+      border-top: 1px solid var(--border);
+      padding: 100px 32px;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .dashboard-heading {
+      font-size: 13px;
+      color: var(--muted2);
+      margin-bottom: 48px;
+      letter-spacing: 0.01em;
+    }
+
+    .dashboard-ui {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .dashboard-topbar {
+      background: var(--bg3);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dash-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--border);
+    }
+
+    .dashboard-body {
+      padding: 28px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .dash-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 24px;
+    }
+
+    .dash-card-wide {
+      grid-column: span 2;
+    }
+
+    .dash-label {
+      font-size: 11px;
+      font-family: var(--mono);
+      color: var(--muted2);
+      margin-bottom: 8px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .dash-value {
+      font-size: 32px;
+      font-weight: 300;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .dash-sub {
+      font-size: 12px;
+      color: var(--muted);
+      font-family: var(--mono);
+    }
+
+    .dash-sub-green { color: var(--green); }
+
+    .credit-bar-wrap { margin-top: 16px; }
+
+    .credit-bar-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      font-family: var(--mono);
+      color: var(--muted2);
+      margin-bottom: 6px;
+    }
+
+    .credit-bar-track {
+      background: var(--border);
+      border-radius: 100px;
+      height: 6px;
+      overflow: hidden;
+    }
+
+    .credit-bar-available {
+      height: 100%;
+      border-radius: 100px;
+      background: var(--green);
+      width: 0;
+      transition: width 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .credit-bar-drawn {
+      height: 100%;
+      border-radius: 100px;
+      background: var(--gold);
+      width: 0;
+      transition: width 1.4s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+      margin-top: -6px;
+    }
+
+    .dash-repay-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .dash-repay-row:last-child { border-bottom: none; }
+
+    .dash-repay-agent {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .dash-repay-due {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text);
+    }
+
+    .dash-repay-pill {
+      font-size: 10px;
+      font-family: var(--mono);
+      padding: 3px 8px;
+      border-radius: 100px;
+      background: var(--bg3);
+      color: var(--muted);
+    }
+
+    .dash-repay-pill.soon { background: rgba(207,95,56,0.12); color: var(--gold); }
+    .dash-repay-pill.ok   { background: rgba(61,158,106,0.12); color: var(--green); }
+
+    @media (max-width: 640px) {
+      .dashboard-body { grid-template-columns: 1fr; }
+      .dash-card-wide { grid-column: span 1; }
+    }
+
     /* ─── DISAPPEAR ─── */
     .disappear {
       border-top: 1px solid var(--border);
@@ -928,6 +1084,82 @@
   </div>
 </div>
 
+<!-- DASHBOARD PREVIEW -->
+<div class="dashboard-section">
+  <div class="dashboard-heading">Dashboard preview</div>
+  <div class="dashboard-ui">
+
+    <!-- Fake window chrome -->
+    <div class="dashboard-topbar">
+      <div class="dash-dot"></div>
+      <div class="dash-dot"></div>
+      <div class="dash-dot"></div>
+    </div>
+
+    <div class="dashboard-body">
+
+      <!-- Credit line -->
+      <div class="dash-card">
+        <div class="dash-label">Credit line</div>
+        <div class="dash-value">$250</div>
+        <div class="dash-sub">Established tier</div>
+        <div class="credit-bar-wrap">
+          <div class="credit-bar-labels">
+            <span>$87.50 drawn</span>
+            <span>$162.50 available</span>
+          </div>
+          <div class="credit-bar-track" style="position:relative;">
+            <div style="position:absolute;top:0;left:0;height:100%;border-radius:100px;background:var(--green);width:0;transition:width 1.4s cubic-bezier(0.4,0,0.2,1);" data-w="65%"></div>
+            <div style="position:absolute;top:0;left:0;height:100%;border-radius:100px;background:var(--gold);opacity:0.7;width:0;transition:width 1.4s cubic-bezier(0.4,0,0.2,1) 0.1s;" data-w="35%"></div>
+          </div>
+          <div class="credit-bar-labels" style="margin-top:5px;margin-bottom:0;">
+            <span style="color:var(--gold)">▬ Drawn</span>
+            <span style="color:var(--green)">▬ Available</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Repayment countdown -->
+      <div class="dash-card">
+        <div class="dash-label">Next repayment</div>
+        <div class="dash-value">4<span style="font-size:18px;color:var(--muted);font-weight:400;">d</span> 11<span style="font-size:18px;color:var(--muted);font-weight:400;">h</span></div>
+        <div class="dash-sub dash-sub-green">↑ On track · auto-sweep enabled</div>
+        <div style="margin-top:16px;background:var(--bg2);border-radius:8px;padding:12px 14px;border:1px solid var(--border);">
+          <div style="font-size:11px;color:var(--muted2);font-family:var(--mono);margin-bottom:6px;">REPAYMENT DUE</div>
+          <div style="font-size:13px;color:var(--text);font-family:var(--mono);">$87.50 + $2.19 fee</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:3px;font-family:var(--mono);">Auto-sweep from revenue wallet</div>
+        </div>
+      </div>
+
+      <!-- Agent repayment schedule -->
+      <div class="dash-card dash-card-wide">
+        <div class="dash-label">Agent repayment schedule</div>
+        <div class="dash-repay-row">
+          <span class="dash-repay-agent">research-agent-01</span>
+          <span class="dash-repay-due">$87.50 · due in 4d</span>
+          <span class="dash-repay-pill ok">On track</span>
+        </div>
+        <div class="dash-repay-row">
+          <span class="dash-repay-agent">procurement-agent-03</span>
+          <span class="dash-repay-due">$32.00 · due in 1d</span>
+          <span class="dash-repay-pill soon">Due soon</span>
+        </div>
+        <div class="dash-repay-row">
+          <span class="dash-repay-agent">data-pipeline-agent</span>
+          <span class="dash-repay-due">$210.00 · due in 6d</span>
+          <span class="dash-repay-pill ok">On track</span>
+        </div>
+        <div class="dash-repay-row">
+          <span class="dash-repay-agent">outreach-agent-07</span>
+          <span class="dash-repay-due">$14.25 · due in 2d</span>
+          <span class="dash-repay-pill ok">On track</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <!-- CODE -->
 <div class="code-section">
   <div class="code-eyebrow">Drop-in integration</div>
@@ -1129,7 +1361,7 @@
     });
   }, { threshold: 0.2 });
 
-  document.querySelectorAll('.bar-fill, .sig-fill').forEach(el => {
+  document.querySelectorAll('.bar-fill, .sig-fill, .credit-bar-track [data-w]').forEach(el => {
     el.style.width = '0';
     io.observe(el);
   });
