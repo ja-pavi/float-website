@@ -1084,6 +1084,21 @@
   </div>
 </div>
 
+<!-- CODE -->
+<div class="code-section">
+  <div class="code-eyebrow">Drop-in integration</div>
+  <pre><span class="c-comment"># before Float</span>
+<span class="c-kw">async def</span> <span class="c-fn">run</span>(<span class="c-text">task</span>):
+    <span class="c-kw">return</span> <span class="c-kw">await</span> <span class="c-fn">agent.run</span>(<span class="c-text">task</span>)
+
+<span class="c-comment"># with Float</span>
+<span class="c-kw">from</span> <span class="c-text">Float_sdk</span> <span class="c-kw">import</span> <span class="c-fn">credit</span>
+
+<span class="c-dec">@credit</span>(<span class="c-str">"research-agent-01"</span>)
+<span class="c-kw">async def</span> <span class="c-fn">run</span>(<span class="c-text">task</span>):
+    <span class="c-kw">return</span> <span class="c-kw">await</span> <span class="c-fn">agent.run</span>(<span class="c-text">task</span>)</pre>
+</div>
+
 <!-- DASHBOARD PREVIEW -->
 <div class="dashboard-section">
   <div class="dashboard-heading">Dashboard preview</div>
@@ -1160,20 +1175,6 @@
   </div>
 </div>
 
-<!-- CODE -->
-<div class="code-section">
-  <div class="code-eyebrow">Drop-in integration</div>
-  <pre><span class="c-comment"># before Float</span>
-<span class="c-kw">async def</span> <span class="c-fn">run</span>(<span class="c-text">task</span>):
-    <span class="c-kw">return</span> <span class="c-kw">await</span> <span class="c-fn">agent.run</span>(<span class="c-text">task</span>)
-
-<span class="c-comment"># with Float</span>
-<span class="c-kw">from</span> <span class="c-text">Float_sdk</span> <span class="c-kw">import</span> <span class="c-fn">credit</span>
-
-<span class="c-dec">@credit</span>(<span class="c-str">"research-agent-01"</span>)
-<span class="c-kw">async def</span> <span class="c-fn">run</span>(<span class="c-text">task</span>):
-    <span class="c-kw">return</span> <span class="c-kw">await</span> <span class="c-fn">agent.run</span>(<span class="c-text">task</span>)</pre>
-</div>
 
 <!-- THINGS THAT DISAPPEAR -->
 <div class="disappear">
