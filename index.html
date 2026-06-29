@@ -236,6 +236,17 @@
       to   { transform: translateX(-50%); }
     }
 
+    @keyframes flash-up {
+      0%   { background: rgba(61,158,106,0.3); }
+      100% { background: transparent; }
+    }
+    @keyframes flash-down {
+      0%   { background: rgba(224,95,95,0.3); }
+      100% { background: transparent; }
+    }
+    .ticker-flash-up   { animation: flash-up   1s ease-out forwards; }
+    .ticker-flash-down { animation: flash-down 1s ease-out forwards; }
+
     /* ─── SCORE SECTION ─── */
     .score-section {
       padding: 120px 32px;
@@ -1028,6 +1039,45 @@
       if (e.key === 'Enter') submitWaitlist(id === 'hero-email' ? 'hero' : 'cta');
     });
   });
+
+  // live ticker updates
+  const tickerData = [
+    { agent: 'research-agent-04',    score: 743 },
+    { agent: 'procurement-agent-01', score: 521 },
+    { agent: 'data-pipeline-agent',  score: 889 },
+    { agent: 'billing-agent-02',     score: 412 },
+    { agent: 'outreach-agent-07',    score: 654 },
+    { agent: 'content-agent-03',     score: 318 },
+    { agent: 'ops-agent-11',         score: 967 },
+    { agent: 'web-scraper-09',       score: 577 },
+  ];
+
+  function tickerUpdate() {
+    const d = tickerData[Math.floor(Math.random() * tickerData.length)];
+    const delta = Math.round(Math.random() * 30) - 10; // -10 to +20, slight upward bias
+    if (!delta) return schedule();
+    const next = Math.max(0, Math.min(1000, d.score + delta));
+    const actual = next - d.score;
+    if (!actual) return schedule();
+    d.score = next;
+    const up = actual > 0;
+    document.querySelectorAll('.ticker-item').forEach(item => {
+      if (item.querySelector('.ticker-agent')?.textContent !== d.agent) return;
+      item.querySelector('.ticker-score').textContent = next;
+      const ch = item.querySelector('.ticker-change');
+      ch.textContent = (up ? '↑ +' : '↓ −') + Math.abs(actual);
+      ch.className = 'ticker-change' + (up ? '' : ' ticker-neg');
+      item.classList.remove('ticker-flash-up', 'ticker-flash-down');
+      void item.offsetWidth; // restart animation
+      item.classList.add(up ? 'ticker-flash-up' : 'ticker-flash-down');
+    });
+    schedule();
+  }
+
+  function schedule() {
+    setTimeout(tickerUpdate, 10000 + Math.random() * 5000); // 10–15s
+  }
+  schedule();
 
   // animate bars on scroll
   const io = new IntersectionObserver(entries => {
