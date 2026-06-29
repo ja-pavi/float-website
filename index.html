@@ -1079,6 +1079,49 @@
   }
   schedule();
 
+  // live score card
+  let cardScore = 621;
+  let cardWeekDelta = 43;
+
+  function cardUpdate() {
+    const delta = Math.round(Math.random() * 14) - 5; // -5 to +9
+    if (!delta) return scheduleCard();
+    const next = Math.max(0, Math.min(1000, cardScore + delta));
+    const actual = next - cardScore;
+    if (!actual) return scheduleCard();
+    cardScore = next;
+    cardWeekDelta = Math.max(0, cardWeekDelta + actual);
+
+    const scoreEl = document.querySelector('.score-num');
+    const trendEl = document.querySelector('.score-trend');
+    const barFill = document.querySelector('.bar-fill');
+
+    // count up/down animation
+    const start = parseInt(scoreEl.textContent);
+    const steps = 20;
+    const step = (next - start) / steps;
+    let current = start;
+    let i = 0;
+    const counter = setInterval(() => {
+      i++;
+      current += step;
+      scoreEl.textContent = Math.round(i < steps ? current : next);
+      if (i >= steps) clearInterval(counter);
+    }, 30);
+
+    trendEl.textContent = '+' + cardWeekDelta + ' this week';
+    trendEl.style.color = actual > 0 ? 'var(--green)' : '#E05F5F';
+
+    if (barFill) barFill.style.width = (next / 10).toFixed(1) + '%';
+
+    scheduleCard();
+  }
+
+  function scheduleCard() {
+    setTimeout(cardUpdate, 3000 + Math.random() * 3000); // 3–6s
+  }
+  scheduleCard();
+
   // animate bars on scroll
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
