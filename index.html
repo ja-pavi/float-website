@@ -90,7 +90,24 @@
     [data-theme="dark"] .how-card code,
     [data-theme="dark"] .feat p code { color: var(--lime); background: rgba(175,252,65,0.14); }
     [data-theme="dark"] .form-success { color: var(--lime); }
-    [data-theme="dark"] .mark { color: var(--lime); background: none; padding: 0; }
+    [data-theme="dark"] .mark {
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      background-image: linear-gradient(100deg, #7ab52f, #affc41 40%, #eaffbe 52%, #affc41 64%, #7ab52f);
+      background-size: 220% 100%;
+      animation: markerShine 5.5s linear infinite;
+      padding: 0;
+    }
+    [data-theme="dark"] .mark::before { display: none; }
+    [data-theme="dark"] .rotator-word {
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      background-image: linear-gradient(100deg, #7ab52f, #affc41 40%, #eaffbe 52%, #affc41 64%, #7ab52f);
+      background-size: 220% 100%;
+      animation: markerShine 5.5s linear infinite;
+    }
 
     /* smooth cross-fade only while toggling */
     html.theming, html.theming * {
@@ -117,12 +134,40 @@
 
     .wrap { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
 
-    /* highlighter accent on light */
+    /* highlighter accent on light — sweeps in + subtle shimmer */
     .mark {
+      position: relative;
+      isolation: isolate;
       color: #131b05;
-      background: linear-gradient(180deg, transparent 58%, var(--lime) 58%, var(--lime) 92%, transparent 92%);
-      padding: 0 2px;
+      padding: 0 5px;
       white-space: nowrap;
+    }
+    .mark::before {
+      content: "";
+      position: absolute;
+      left: 0; right: 0;
+      top: 50%; bottom: 5%;
+      z-index: -1;
+      border-radius: 5px;
+      background: linear-gradient(100deg, #8fd42f, var(--lime) 42%, #e2ff9d 52%, var(--lime) 62%, #8fd42f);
+      background-size: 220% 100%;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.8s var(--ease) 0.45s;
+      animation: markerShine 5.5s linear infinite;
+    }
+    .reveal.in .mark::before { transform: scaleX(1); }
+    @keyframes markerShine {
+      0%   { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+    .rotator-word { display: inline-block; will-change: opacity, transform; }
+    .rotator.resweep::before {
+      animation: markerDraw 0.55s var(--ease) forwards, markerShine 5.5s linear infinite;
+    }
+    @keyframes markerDraw {
+      from { transform: scaleX(0); }
+      to   { transform: scaleX(1); }
     }
     .lime { color: var(--lime); }
 
@@ -157,6 +202,8 @@
     .reveal.in { opacity: 1; transform: none; }
     @media (prefers-reduced-motion: reduce) {
       .reveal { opacity: 1 !important; transform: none !important; }
+      .mark::before { transform: scaleX(1) !important; transition: none !important; animation: none !important; }
+      [data-theme="dark"] .mark { animation: none !important; }
       html { scroll-behavior: auto; }
     }
 
@@ -872,7 +919,7 @@
       <span class="pill">Private beta</span>
       <span>Onboarding developers one by one</span>
     </div>
-    <h1 class="reveal" style="transition-delay:.05s">Your agents<br/>deserve <span class="mark">credit.</span></h1>
+    <h1 class="reveal" style="transition-delay:.05s">Your agents<br/>deserve <span class="mark rotator" id="rotator"><span class="rotator-word" id="rotator-word">credit.</span></span></h1>
     <p class="hero-sub reveal" style="transition-delay:.1s">
       Float gives every AI agent a <b>credit score</b> and a <b>dynamic credit line</b>. No pre-funding. No wallets. No top-ups at 2am.
     </p>
@@ -1218,6 +1265,39 @@
     try { localStorage.setItem('float-theme', next); } catch (e) {}
     setTimeout(() => document.documentElement.classList.remove('theming'), 400);
   });
+
+  // rotating hero word: credit → capital → runway
+  (function () {
+    const mark = document.getElementById('rotator');
+    const word = document.getElementById('rotator-word');
+    if (!mark || !word) return;
+    const words = ['credit.', 'capital.', 'runway.'];
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let i = 0;
+    setInterval(() => {
+      i = (i + 1) % words.length;
+      if (reduce) { word.textContent = words[i]; return; }
+      // animate out (up + fade)
+      word.style.transition = 'opacity 0.35s var(--ease), transform 0.35s var(--ease)';
+      word.style.opacity = '0';
+      word.style.transform = 'translateY(-0.45em)';
+      setTimeout(() => {
+        word.textContent = words[i];
+        // jump below without transition
+        word.style.transition = 'none';
+        word.style.transform = 'translateY(0.45em)';
+        // replay the marker sweep
+        mark.classList.remove('resweep');
+        void mark.offsetWidth;
+        mark.classList.add('resweep');
+        void word.offsetWidth;
+        // animate in (settle up + fade)
+        word.style.transition = 'opacity 0.4s var(--ease), transform 0.4s var(--ease)';
+        word.style.opacity = '1';
+        word.style.transform = 'translateY(0)';
+      }, 350);
+    }, 6000);
+  })();
 
   // waitlist
   function focusWaitlist(src) {
