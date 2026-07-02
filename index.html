@@ -183,13 +183,6 @@
       color: var(--ink-mute);
       margin-bottom: 22px;
     }
-    .eyebrow::before {
-      content: "";
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: var(--lime);
-      box-shadow: 0 0 0 4px rgba(175,252,65,0.25);
-    }
     .dark .eyebrow { color: var(--muted); }
 
     /* ─── REVEAL ─── */
@@ -302,7 +295,7 @@
     /* ─── HERO ─── */
     .hero {
       position: relative;
-      padding: 168px 32px 90px;
+      padding: 140px 32px 60px;
       text-align: center;
       overflow: hidden;
     }
@@ -407,7 +400,7 @@
 
     /* ─── TRUST BAR ─── */
     .trust {
-      padding: 8px 0 44px;
+      padding: 52px 0 44px;
       text-align: center;
     }
     .trust-label {
@@ -716,11 +709,13 @@
     .credit-bar-wrap { margin-top: 16px; }
     .credit-bar-labels { display: flex; justify-content: space-between; font-size: 11px; font-family: var(--mono); color: var(--muted2); margin-bottom: 6px; }
     .credit-bar-track { background: var(--border); border-radius: 100px; height: 6px; overflow: hidden; }
-    .dash-repay-row { display: flex; align-items: center; justify-content: space-between; padding: 11px 0; border-bottom: 1px solid var(--border); gap: 10px; }
+    .credit-bar-drawn { height: 100%; border-radius: 100px; background: var(--lime); width: 0; transition: width 1.4s var(--ease); }
+    .dash-repay-row { display: grid; grid-template-columns: 1fr 66px 74px 82px; align-items: center; gap: 10px; padding: 11px 0; border-bottom: 1px solid var(--border); }
     .dash-repay-row:last-child { border-bottom: none; }
-    .dash-repay-agent { font-family: var(--mono); font-size: 11px; color: var(--muted); }
-    .dash-repay-due { font-family: var(--mono); font-size: 11px; color: var(--text); }
-    .dash-repay-pill { font-size: 10px; font-family: var(--mono); padding: 3px 9px; border-radius: 100px; background: var(--bg3); color: var(--muted); flex-shrink: 0; }
+    .dash-repay-agent { font-family: var(--mono); font-size: 11px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .dash-repay-amt { font-family: var(--mono); font-size: 11px; color: var(--text); text-align: right; }
+    .dash-repay-when { font-family: var(--mono); font-size: 11px; color: var(--muted); text-align: right; }
+    .dash-repay-pill { font-size: 10px; font-family: var(--mono); padding: 3px 9px; border-radius: 100px; background: var(--bg3); color: var(--muted); text-align: center; justify-self: end; }
     .dash-repay-pill.soon { background: rgba(175,252,65,0.12); color: var(--lime); }
     .dash-repay-pill.ok   { background: rgba(61,158,106,0.14); color: var(--green); }
 
@@ -932,19 +927,6 @@
   </div>
 </section>
 
-<!-- TRUST -->
-<div class="trust wrap reveal">
-  <div class="trust-label">Built for the agents you already run</div>
-  <div class="trust-logos">
-    <span>LangChain</span>
-    <span>CrewAI</span>
-    <span>AutoGPT</span>
-    <span>OpenAI Assistants</span>
-    <span>Anthropic</span>
-    <span>MCP</span>
-  </div>
-</div>
-
 <!-- TICKER -->
 <div class="ticker-wrap">
   <div class="ticker-track" id="ticker">
@@ -965,6 +947,19 @@
     <div class="ticker-item"><span class="ticker-agent">content-agent-03</span><span class="ticker-score">318</span><span class="ticker-change">↑ +11</span></div>
     <div class="ticker-item"><span class="ticker-agent">ops-agent-11</span><span class="ticker-score">967</span><span class="ticker-change">↑ +5</span></div>
     <div class="ticker-item"><span class="ticker-agent">web-scraper-09</span><span class="ticker-score">577</span><span class="ticker-change">↑ +14</span></div>
+  </div>
+</div>
+
+<!-- TRUST -->
+<div class="trust wrap reveal">
+  <div class="trust-label">Built for the agents you already run</div>
+  <div class="trust-logos">
+    <span>LangChain</span>
+    <span>CrewAI</span>
+    <span>AutoGPT</span>
+    <span>OpenAI Assistants</span>
+    <span>Anthropic</span>
+    <span>MCP</span>
   </div>
 </div>
 
@@ -1141,13 +1136,12 @@
           <div class="dash-sub">Established tier</div>
           <div class="credit-bar-wrap">
             <div class="credit-bar-labels"><span>$87.50 drawn</span><span>$162.50 available</span></div>
-            <div class="credit-bar-track" style="position:relative;">
-              <div style="position:absolute;top:0;left:0;height:100%;border-radius:100px;background:var(--green);width:0;transition:width 1.4s var(--ease);" data-w="65%"></div>
-              <div style="position:absolute;top:0;left:0;height:100%;border-radius:100px;background:var(--lime);opacity:0.85;width:0;transition:width 1.4s var(--ease) 0.1s;" data-w="35%"></div>
+            <div class="credit-bar-track">
+              <div class="credit-bar-drawn" data-w="35%"></div>
             </div>
             <div class="credit-bar-labels" style="margin-top:6px;margin-bottom:0;">
               <span style="color:var(--lime)">▬ Drawn</span>
-              <span style="color:var(--green)">▬ Available</span>
+              <span style="color:var(--muted)">▬ Available</span>
             </div>
           </div>
         </div>
@@ -1165,10 +1159,10 @@
 
         <div class="dash-card dash-card-wide">
           <div class="dash-label">Agent repayment schedule</div>
-          <div class="dash-repay-row"><span class="dash-repay-agent">research-agent-01</span><span class="dash-repay-due">$87.50 · due in 4d</span><span class="dash-repay-pill ok">On track</span></div>
-          <div class="dash-repay-row"><span class="dash-repay-agent">procurement-agent-03</span><span class="dash-repay-due">$32.00 · due in 1d</span><span class="dash-repay-pill soon">Due soon</span></div>
-          <div class="dash-repay-row"><span class="dash-repay-agent">data-pipeline-agent</span><span class="dash-repay-due">$210.00 · due in 6d</span><span class="dash-repay-pill ok">On track</span></div>
-          <div class="dash-repay-row"><span class="dash-repay-agent">outreach-agent-07</span><span class="dash-repay-due">$14.25 · due in 2d</span><span class="dash-repay-pill ok">On track</span></div>
+          <div class="dash-repay-row"><span class="dash-repay-agent">research-agent-01</span><span class="dash-repay-amt">$87.50</span><span class="dash-repay-when">due in 4d</span><span class="dash-repay-pill ok">On track</span></div>
+          <div class="dash-repay-row"><span class="dash-repay-agent">procurement-agent-03</span><span class="dash-repay-amt">$32.00</span><span class="dash-repay-when">due in 1d</span><span class="dash-repay-pill soon">Due soon</span></div>
+          <div class="dash-repay-row"><span class="dash-repay-agent">data-pipeline-agent</span><span class="dash-repay-amt">$210.00</span><span class="dash-repay-when">due in 6d</span><span class="dash-repay-pill ok">On track</span></div>
+          <div class="dash-repay-row"><span class="dash-repay-agent">outreach-agent-07</span><span class="dash-repay-amt">$14.25</span><span class="dash-repay-when">due in 2d</span><span class="dash-repay-pill ok">On track</span></div>
         </div>
       </div>
     </div>
