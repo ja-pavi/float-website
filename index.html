@@ -824,6 +824,7 @@
     <a href="#score">Credit score</a>
     <a href="#features">Features</a>
     <a href="#developers">Developers</a>
+    <a href="#dashboard">Dashboard</a>
   </div>
   <div class="nav-right">
     <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle theme">
@@ -1040,50 +1041,60 @@
 <span class="c-kw">async def</span> <span class="c-fn">run</span>(<span class="c-text">task</span>):
     <span class="c-kw">return</span> <span class="c-kw">await</span> <span class="c-fn">agent.run</span>(<span class="c-text">task</span>)</pre>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-          <div class="dashboard-ui">
-            <div class="dashboard-topbar">
-              <span class="dash-dot"></span><span class="dash-dot"></span><span class="dash-dot"></span>
-              <span class="dash-file">float.builders/dashboard</span>
+<!-- DASHBOARD -->
+<section class="sec-pad" id="dashboard">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <div class="eyebrow">Dashboard</div>
+      <h2>See every agent's<br/>credit at a glance.</h2>
+      <p>Track credit lines, repayments, and scores across your entire fleet — in one live view.</p>
+    </div>
+    <div class="dashboard-ui reveal" style="max-width:860px;margin:0 auto;">
+      <div class="dashboard-topbar">
+        <span class="dash-dot"></span><span class="dash-dot"></span><span class="dash-dot"></span>
+        <span class="dash-file">float.builders/dashboard</span>
+      </div>
+      <div class="dashboard-body">
+        <div class="dash-card">
+          <div class="dash-label">Credit line</div>
+          <div class="dash-value">$250</div>
+          <div class="dash-sub">Established tier</div>
+          <div class="credit-bar-wrap">
+            <div class="credit-bar-labels"><span>$87.50 drawn</span><span>$162.50 available</span></div>
+            <div class="credit-bar-track" style="position:relative;">
+              <div style="position:absolute;top:0;left:0;height:100%;border-radius:100px;background:var(--green);width:0;transition:width 1.4s var(--ease);" data-w="65%"></div>
+              <div style="position:absolute;top:0;left:0;height:100%;border-radius:100px;background:var(--lime);opacity:0.85;width:0;transition:width 1.4s var(--ease) 0.1s;" data-w="35%"></div>
             </div>
-            <div class="dashboard-body">
-              <div class="dash-card">
-                <div class="dash-label">Credit line</div>
-                <div class="dash-value">$250</div>
-                <div class="dash-sub">Established tier</div>
-                <div class="credit-bar-wrap">
-                  <div class="credit-bar-labels"><span>$87.50 drawn</span><span>$162.50 available</span></div>
-                  <div class="credit-bar-track" style="position:relative;">
-                    <div style="position:absolute;top:0;left:0;height:100%;border-radius:100px;background:var(--green);width:0;transition:width 1.4s var(--ease);" data-w="65%"></div>
-                    <div style="position:absolute;top:0;left:0;height:100%;border-radius:100px;background:var(--lime);opacity:0.85;width:0;transition:width 1.4s var(--ease) 0.1s;" data-w="35%"></div>
-                  </div>
-                  <div class="credit-bar-labels" style="margin-top:6px;margin-bottom:0;">
-                    <span style="color:var(--lime)">▬ Drawn</span>
-                    <span style="color:var(--green)">▬ Available</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="dash-card">
-                <div class="dash-label">Next repayment</div>
-                <div class="dash-value">4<span style="font-size:17px;color:var(--muted);font-weight:400;">d</span> 11<span style="font-size:17px;color:var(--muted);font-weight:400;">h</span></div>
-                <div class="dash-sub dash-sub-green">↑ On track · auto-sweep enabled</div>
-                <div style="margin-top:16px;background:var(--bg2);border-radius:10px;padding:12px 14px;border:1px solid var(--border);">
-                  <div style="font-size:11px;color:var(--muted2);font-family:var(--mono);margin-bottom:6px;">REPAYMENT DUE</div>
-                  <div style="font-size:13px;color:var(--text);font-family:var(--mono);">$87.50 + $2.19 fee</div>
-                  <div style="font-size:11px;color:var(--muted);margin-top:3px;font-family:var(--mono);">Auto-sweep from revenue wallet</div>
-                </div>
-              </div>
-
-              <div class="dash-card dash-card-wide">
-                <div class="dash-label">Agent repayment schedule</div>
-                <div class="dash-repay-row"><span class="dash-repay-agent">research-agent-01</span><span class="dash-repay-due">$87.50 · due in 4d</span><span class="dash-repay-pill ok">On track</span></div>
-                <div class="dash-repay-row"><span class="dash-repay-agent">procurement-agent-03</span><span class="dash-repay-due">$32.00 · due in 1d</span><span class="dash-repay-pill soon">Due soon</span></div>
-                <div class="dash-repay-row"><span class="dash-repay-agent">data-pipeline-agent</span><span class="dash-repay-due">$210.00 · due in 6d</span><span class="dash-repay-pill ok">On track</span></div>
-                <div class="dash-repay-row"><span class="dash-repay-agent">outreach-agent-07</span><span class="dash-repay-due">$14.25 · due in 2d</span><span class="dash-repay-pill ok">On track</span></div>
-              </div>
+            <div class="credit-bar-labels" style="margin-top:6px;margin-bottom:0;">
+              <span style="color:var(--lime)">▬ Drawn</span>
+              <span style="color:var(--green)">▬ Available</span>
             </div>
           </div>
+        </div>
+
+        <div class="dash-card">
+          <div class="dash-label">Next repayment</div>
+          <div class="dash-value">4<span style="font-size:17px;color:var(--muted);font-weight:400;">d</span> 11<span style="font-size:17px;color:var(--muted);font-weight:400;">h</span></div>
+          <div class="dash-sub dash-sub-green">↑ On track · auto-sweep enabled</div>
+          <div style="margin-top:16px;background:var(--bg2);border-radius:10px;padding:12px 14px;border:1px solid var(--border);">
+            <div style="font-size:11px;color:var(--muted2);font-family:var(--mono);margin-bottom:6px;">REPAYMENT DUE</div>
+            <div style="font-size:13px;color:var(--text);font-family:var(--mono);">$87.50 + $2.19 fee</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:3px;font-family:var(--mono);">Auto-sweep from revenue wallet</div>
+          </div>
+        </div>
+
+        <div class="dash-card dash-card-wide">
+          <div class="dash-label">Agent repayment schedule</div>
+          <div class="dash-repay-row"><span class="dash-repay-agent">research-agent-01</span><span class="dash-repay-due">$87.50 · due in 4d</span><span class="dash-repay-pill ok">On track</span></div>
+          <div class="dash-repay-row"><span class="dash-repay-agent">procurement-agent-03</span><span class="dash-repay-due">$32.00 · due in 1d</span><span class="dash-repay-pill soon">Due soon</span></div>
+          <div class="dash-repay-row"><span class="dash-repay-agent">data-pipeline-agent</span><span class="dash-repay-due">$210.00 · due in 6d</span><span class="dash-repay-pill ok">On track</span></div>
+          <div class="dash-repay-row"><span class="dash-repay-agent">outreach-agent-07</span><span class="dash-repay-due">$14.25 · due in 2d</span><span class="dash-repay-pill ok">On track</span></div>
         </div>
       </div>
     </div>
