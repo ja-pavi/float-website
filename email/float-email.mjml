@@ -1,0 +1,140 @@
+<mjml>
+  <mj-head>
+    <mj-preview>You're on the list — your agents are about to earn their keep.</mj-preview>
+    <mj-font name="Inter" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+    <mj-attributes>
+      <mj-all font-family="Inter, Helvetica, Arial, sans-serif" />
+      <mj-text font-size="15px" color="#A79E92" line-height="1.65" />
+      <mj-section padding="0" />
+    </mj-attributes>
+    <mj-style>
+      a { color: #affc41; }
+      .label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+      @media only screen and (max-width:480px) {
+        .card-pad { padding: 32px 24px 30px !important; }
+        .h1 div { font-size: 30px !important; }
+      }
+    </mj-style>
+  </mj-head>
+
+  <mj-body background-color="#F0ECE6" width="600px">
+
+    <!-- LOGO -->
+    <mj-section padding="40px 24px 22px">
+      <mj-column>
+        <mj-text font-size="16px" font-weight="800" letter-spacing="0.08em" color="#1B1917" text-transform="uppercase" padding="0">
+          &#9711;&nbsp; FLOAT
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- CARD -->
+    <mj-wrapper background-color="#1B1917" border-radius="20px" padding="0">
+      <mj-section css-class="card-pad" padding="44px 44px 40px">
+        <mj-column>
+
+          <!-- Eyebrow -->
+          <mj-text css-class="label" color="#affc41" padding="0 0 14px">
+            &#10003;&nbsp; You're on the list
+          </mj-text>
+
+          <!-- Headline -->
+          <mj-text css-class="h1" font-size="36px" font-weight="800" letter-spacing="-0.03em" line-height="1.04" color="#F5F1EB" padding="0 0 18px">
+            <div>Your agents are about to <span style="color:#affc41;">earn their keep.</span></div>
+          </mj-text>
+
+          <!-- Intro -->
+          <mj-text color="#A79E92" font-size="15px" padding="0 0 28px">
+            Thanks for signing up for Float. We're onboarding developers one by one — you'll hear from us personally when your spot is ready.
+          </mj-text>
+
+          <!-- Score card (brand echo) -->
+          <mj-text padding="0 0 30px">
+            <div style="background:#242220;border:1px solid #3D3935;border-radius:14px;padding:22px 24px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+                <tr>
+                  <td style="font-family:'Courier New',monospace;font-size:12px;color:#A79E92;">research-agent-01</td>
+                  <td align="right" style="font-family:'Courier New',monospace;font-size:12px;color:#3D9E6A;">&#9679; active</td>
+                </tr>
+              </table>
+              <div style="font-family:'Courier New',monospace;font-size:52px;font-weight:600;color:#affc41;letter-spacing:-0.03em;line-height:1;padding:12px 0 4px;">621</div>
+              <div style="font-family:'Courier New',monospace;font-size:12px;color:#3D9E6A;padding-bottom:16px;">+43 this week</div>
+              <div style="background:#3D3935;border-radius:100px;height:6px;font-size:0;line-height:0;">
+                <div style="background:#affc41;border-radius:100px;height:6px;width:62%;font-size:0;line-height:0;">&nbsp;</div>
+              </div>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;padding-top:6px;">
+                <tr>
+                  <td style="font-family:'Courier New',monospace;font-size:10px;color:#6B645C;padding-top:6px;">0</td>
+                  <td align="right" style="font-family:'Courier New',monospace;font-size:10px;color:#6B645C;padding-top:6px;">1000</td>
+                </tr>
+              </table>
+            </div>
+          </mj-text>
+
+          <!-- Divider -->
+          <mj-divider border-color="#3D3935" border-width="1px" padding="0 0 24px" />
+
+          <!-- What to expect label -->
+          <mj-text css-class="label" color="#6B645C" padding="0 0 18px">
+            What to expect
+          </mj-text>
+
+          <!-- Step 01 -->
+          <mj-text color="#F5F1EB" font-size="15px" font-weight="600" padding="0 0 4px">
+            <span style="font-family:'Courier New',monospace;font-size:11px;color:#affc41;">01</span>&nbsp;&nbsp; A personal email from Jacob
+          </mj-text>
+          <mj-text color="#A79E92" font-size="14px" padding="0 0 18px">
+            We're onboarding manually. You'll get a note from me directly before we set you up.
+          </mj-text>
+
+          <!-- Step 02 -->
+          <mj-text color="#F5F1EB" font-size="15px" font-weight="600" padding="0 0 4px">
+            <span style="font-family:'Courier New',monospace;font-size:11px;color:#affc41;">02</span>&nbsp;&nbsp; Early API access
+          </mj-text>
+          <mj-text color="#A79E92" font-size="14px" padding="0 0 18px">
+            One decorator and your agent has a credit score. You'll get access before anyone else.
+          </mj-text>
+
+          <!-- Step 03 -->
+          <mj-text color="#F5F1EB" font-size="15px" font-weight="600" padding="0 0 4px">
+            <span style="font-family:'Courier New',monospace;font-size:11px;color:#affc41;">03</span>&nbsp;&nbsp; Your feedback shapes the product
+          </mj-text>
+          <mj-text color="#A79E92" font-size="14px" padding="0">
+            What you tell us in the first 30 days gets built.
+          </mj-text>
+
+          <!-- Divider -->
+          <mj-divider border-color="#3D3935" border-width="1px" padding="28px 0 22px" />
+
+          <!-- Feedback callout -->
+          <mj-text padding="0 0 30px">
+            <div style="background:#242220;border-left:3px solid #affc41;border-radius:0 10px 10px 0;padding:16px 20px;color:#F5F1EB;font-size:14px;line-height:1.65;">
+              One ask — hit reply and tell me: <strong style="color:#F5F1EB;">what's the biggest pain point when your agent needs to spend money?</strong> One sentence is enough. I read every response.
+            </div>
+          </mj-text>
+
+          <!-- CTA Button -->
+          <mj-button background-color="#affc41" color="#131b05" font-size="14px" font-weight="700" border-radius="10px" href="https://float.builders" inner-padding="13px 26px" align="left" padding="0">
+            Visit float.builders &#8594;
+          </mj-button>
+
+        </mj-column>
+      </mj-section>
+    </mj-wrapper>
+
+    <!-- FOOTER -->
+    <mj-section padding="26px 24px 44px">
+      <mj-column>
+        <mj-text font-size="13px" font-weight="700" letter-spacing="0.06em" color="#1B1917" align="center" text-transform="uppercase" padding="0 0 10px">
+          &#9711;&nbsp; FLOAT
+        </mj-text>
+        <mj-text font-size="12px" color="#857D72" align="center" line-height="1.6" padding="0">
+          Your agents deserve credit. &nbsp;·&nbsp; <a href="https://float.builders" style="color:#857D72;">float.builders</a><br/>
+          You're receiving this because you signed up at float.builders.<br/>
+          <a href="{unsubscribe_link}" style="color:#857D72;">Unsubscribe</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+  </mj-body>
+</mjml>
