@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Float — Logo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: #F0ECE6; }
+
+    .page { padding: 60px 40px; display: flex; flex-direction: column; gap: 48px; }
+
+    .label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      opacity: 0.4;
+    }
+
+    .swatch {
+      padding: 56px 48px;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    .swatch-dark  { background: #1B1917; }
+    .swatch-light { background: #F5F1EB; border: 1px solid #E0DAD4; }
+    .swatch-white { background: #ffffff; border: 1px solid #E8E4DF; }
+
+    .logo-row {
+      display: flex;
+      align-items: center;
+      gap: 64px;
+      flex-wrap: wrap;
+    }
+
+    /* ── LOGO SVG INLINE ── */
+    .logo-xl svg { width: 240px; }
+    .logo-md svg { width: 140px; }
+    .logo-sm svg { width: 88px; }
+    .logo-xs svg { width: 44px; }
+
+    .divider-line {
+      border: none;
+      border-top: 1px solid rgba(128,128,128,0.15);
+      margin: 0;
+    }
+
+    .size-label {
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 8px;
+      opacity: 0.35;
+      text-align: center;
+    }
+
+    .logo-item { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- DARK -->
+  <div>
+    <div class="label" style="color:#1B1917">On dark</div>
+    <div class="swatch swatch-dark">
+      <div class="logo-row">
+
+        <!-- XL -->
+        <div class="logo-item logo-xl">
+          <svg viewBox="0 0 220 52" xmlns="http://www.w3.org/2000/svg" fill="none">
+            <!-- Mark -->
+            <rect width="52" height="52" rx="13" fill="#CF5F38"/>
+            <!-- Rising bars -->
+            <rect x="11" y="28" width="8" height="14" rx="2.5" fill="#F5F1EB"/>
+            <rect x="22" y="21" width="8" height="21" rx="2.5" fill="#F5F1EB"/>
+            <rect x="33" y="13" width="8" height="29" rx="2.5" fill="#F5F1EB"/>
+            <!-- Wordmark -->
+            <text x="68" y="35" font-family="Inter, sans-serif" font-size="26" font-weight="600" fill="#F5F1EB" letter-spacing="-0.6">Float</text>
+          </svg>
+          <div class="size-label" style="color:#F5F1EB">Extra large</div>
+        </div>
+
+        <!-- MD -->
+        <div class="logo-item logo-md">
+          <svg viewBox="0 0 220 52" xmlns="http://www.w3.org/2000/svg" fill="none">
+            <rect width="52" height="52" rx="13" fill="#CF5F38"/>
+            <rect x="11" y="28" width="8" height="14" rx="2.5" fill="#F5F1EB"/>
+            <rect x="22" y="21" width="8" height="21" rx="2.5" fill="#F5F1EB"/>
+            <rect x="33" y="13" width="8" height="29" rx="2.5" fill="#F5F1EB"/>
+            <text x="68" y="35" font-family="Inter, sans-serif" font-size="26" font-weight="600" fill="#F5F1EB" letter-spacing="-0.6">Float</text>
+          </svg>
+          <div class="size-label" style="color:#F5F1EB">Medium</div>
+        </div>
+
+        <!-- SM -->
+        <div class="logo-item logo-sm">
+          <svg viewBox="0 0 220 52" xmlns="http://www.w3.org/2000/svg" fill="none">
+            <rect width="52" height="52" rx="13" fill="#CF5F38"/>
+            <rect x="11" y="28" width="8" height="14" rx="2.5" fill="#F5F1EB"/>
+            <rect x="22" y="21" width="8" height="21" rx="2.5" fill="#F5F1EB"/>
+            <rect x="33" y="13" width="8" height="29" rx="2.5" fill="#F5F1EB"/>
+            <text x="68" y="35" font-family="Inter, sans-serif" font-size="26" font-weight="600" fill="#F5F1EB" letter-spacing="-0.6">Float</text>
+          </svg>
+          <div class="size-label" style="color:#F5F1EB">Small</div>
+        </div>
+
+        <!-- Icon only -->
+        <div class="logo-item logo-xs">
+          <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" fill="none">
+            <rect width="52" height="52" rx="13" fill="#CF5F38"/>
+            <rect x="11" y="28" width="8" height="14" rx="2.5" fill="#F5F1EB"/>
+            <rect x="22" y="21" width="8" height="21" rx="2.5" fill="#F5F1EB"/>
+            <rect x="33" y="13" width="8" height="29" rx="2.5" fill="#F5F1EB"/>
+          </svg>
+          <div class="size-label" style="color:#F5F1EB">Icon</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- LIGHT -->
+  <div>
+    <div class="label" style="color:#1B1917">On light</div>
+    <div class="swatch swatch-light">
+      <div class="logo-row">
+
+        <div class="logo-item logo-xl">
+          <svg viewBox="0 0 220 52" xmlns="http://www.w3.org/2000/svg" fill="none">
+            <rect width="52" height="52" rx="13" fill="#CF5F38"/>
+            <rect x="11" y="28" width="8" height="14" rx="2.5" fill="#F5F1EB"/>
+            <rect x="22" y="21" width="8" height="21" rx="2.5" fill="#F5F1EB"/>
+            <rect x="33" y="13" width="8" height="29" rx="2.5" fill="#F5F1EB"/>
+            <text x="68" y="35" font-family="Inter, sans-serif" font-size="26" font-weight="600" fill="#1B1917" letter-spacing="-0.6">Float</text>
+          </svg>
+        </div>
+
+        <div class="logo-item logo-md">
+          <svg viewBox="0 0 220 52" xmlns="http://www.w3.org/2000/svg" fill="none">
+            <rect width="52" height="52" rx="13" fill="#CF5F38"/>
+            <rect x="11" y="28" width="8" height="14" rx="2.5" fill="#F5F1EB"/>
+            <rect x="22" y="21" width="8" height="21" rx="2.5" fill="#F5F1EB"/>
+            <rect x="33" y="13" width="8" height="29" rx="2.5" fill="#F5F1EB"/>
+            <text x="68" y="35" font-family="Inter, sans-serif" font-size="26" font-weight="600" fill="#1B1917" letter-spacing="-0.6">Float</text>
+          </svg>
+        </div>
+
+        <div class="logo-item logo-xs">
+          <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" fill="none">
+            <rect width="52" height="52" rx="13" fill="#CF5F38"/>
+            <rect x="11" y="28" width="8" height="14" rx="2.5" fill="#F5F1EB"/>
+            <rect x="22" y="21" width="8" height="21" rx="2.5" fill="#F5F1EB"/>
+            <rect x="33" y="13" width="8" height="29" rx="2.5" fill="#F5F1EB"/>
+          </svg>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- WHITE -->
+  <div>
+    <div class="label" style="color:#1B1917">On white</div>
+    <div class="swatch swatch-white">
+      <div class="logo-row">
+
+        <div class="logo-item logo-xl">
+          <svg viewBox="0 0 220 52" xmlns="http://www.w3.org/2000/svg" fill="none">
+            <rect width="52" height="52" rx="13" fill="#CF5F38"/>
+            <rect x="11" y="28" width="8" height="14" rx="2.5" fill="#fff"/>
+            <rect x="22" y="21" width="8" height="21" rx="2.5" fill="#fff"/>
+            <rect x="33" y="13" width="8" height="29" rx="2.5" fill="#fff"/>
+            <text x="68" y="35" font-family="Inter, sans-serif" font-size="26" font-weight="600" fill="#1B1917" letter-spacing="-0.6">Float</text>
+          </svg>
+        </div>
+
+        <div class="logo-item logo-md">
+          <svg viewBox="0 0 220 52" xmlns="http://www.w3.org/2000/svg" fill="none">
+            <rect width="52" height="52" rx="13" fill="#CF5F38"/>
+            <rect x="11" y="28" width="8" height="14" rx="2.5" fill="#fff"/>
+            <rect x="22" y="21" width="8" height="21" rx="2.5" fill="#fff"/>
+            <rect x="33" y="13" width="8" height="29" rx="2.5" fill="#fff"/>
+            <text x="68" y="35" font-family="Inter, sans-serif" font-size="26" font-weight="600" fill="#1B1917" letter-spacing="-0.6">Float</text>
+          </svg>
+        </div>
+
+        <div class="logo-item logo-xs">
+          <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" fill="none">
+            <rect width="52" height="52" rx="13" fill="#CF5F38"/>
+            <rect x="11" y="28" width="8" height="14" rx="2.5" fill="#fff"/>
+            <rect x="22" y="21" width="8" height="21" rx="2.5" fill="#F5F1EB"/>
+            <rect x="33" y="13" width="8" height="29" rx="2.5" fill="#F5F1EB"/>
+          </svg>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
