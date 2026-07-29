@@ -1087,13 +1087,22 @@
   }, { threshold: 0.14, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.reveal').forEach(el => revealIO.observe(el));
 
-  // fill utilization / collateral bars once they scroll into view
-  const barIO = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.style.width = e.target.dataset.w; barIO.unobserve(e.target); }
-    });
-  }, { threshold: 0.2 });
-  document.querySelectorAll('.util-fill[data-w], .stack-fill[data-w]').forEach(el => barIO.observe(el));
+  // Grow the bars when their card scrolls into view.
+  // Observe the card, not the bars: a bar starts at width:0, and a
+  // zero-area target is not reliably reported by IntersectionObserver.
+  // Fill by [data-w] rather than class name so renaming a bar can't
+  // silently orphan it here.
+  const fillBars = root => root.querySelectorAll('[data-w]').forEach(el => { el.style.width = el.dataset.w; });
+  if (!('IntersectionObserver' in window)) {
+    fillBars(document);
+  } else {
+    const barIO = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { fillBars(e.target); barIO.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.card').forEach(el => barIO.observe(el));
+  }
 </script>
 </body>
 </html>
