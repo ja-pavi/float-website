@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Float — The underwriting layer for agent credit</title>
-  <meta name="description" content="Float is building the underwriting layer for agent credit. Collateral-first credit for agents and the operators who run them." />
+  <meta name="description" content="Float is building the underwriting layer for agent credit. Post collateral, draw on a secured line, earn better terms as repayment history builds." />
   <!-- Open Graph -->
   <meta property="og:title" content="Float — The underwriting layer for agent credit" />
-  <meta property="og:description" content="Float is building the underwriting layer for agent credit. Collateral-first credit for agents and the operators who run them." />
+  <meta property="og:description" content="Float is building the underwriting layer for agent credit. Post collateral, draw on a secured line, earn better terms as repayment history builds." />
   <meta property="og:image" content="https://float.builders/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -16,7 +16,7 @@
   <!-- Twitter / iMessage -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Float — The underwriting layer for agent credit" />
-  <meta name="twitter:description" content="Float is building the underwriting layer for agent credit. Collateral-first credit for agents and the operators who run them." />
+  <meta name="twitter:description" content="Float is building the underwriting layer for agent credit. Post collateral, draw on a secured line, earn better terms as repayment history builds." />
   <meta name="twitter:image" content="https://float.builders/og-image.png" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'><circle cx='12' cy='12' r='10' stroke='%23affc41' stroke-width='2'/><circle cx='12' cy='12' r='4' stroke='%23affc41' stroke-width='2'/><line x1='8.8' y1='8.8' x2='5.5' y2='5.5' stroke='%23affc41' stroke-width='2' stroke-linecap='round'/><line x1='15.2' y1='8.8' x2='18.5' y2='5.5' stroke='%23affc41' stroke-width='2' stroke-linecap='round'/><line x1='15.2' y1='15.2' x2='18.5' y2='18.5' stroke='%23affc41' stroke-width='2' stroke-linecap='round'/><line x1='8.8' y1='15.2' x2='5.5' y2='18.5' stroke='%23affc41' stroke-width='2' stroke-linecap='round'/></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -34,11 +34,35 @@
       --ink-mute:   #857D72;
       --line:       #DCD6CB;
 
-      /* Original Float lime. On cream, full lime is unreadable — hence the
-         deeper --accent for anything that carries meaning as text. Lime
-         itself is reserved for small non-text marks. */
-      --accent:     #3F6B12;
-      --accent-lime:#AFFC41;
+      /* Original Float lime — the only accent on the site. It measures
+         1.06:1 against cream (near-identical luminance, separated only by
+         hue), so it can never sit directly on paper; it hits 14:1 on ink.
+         The rule that follows from that: lime only ever appears on an ink
+         ground. Accents on paper are neutral, never a darkened stand-in
+         green — a muddy olive reads as a compromise, and there is no
+         shade of green that is both legible on cream and recognisably
+         Float. */
+      --lime:       #AFFC41;
+
+      /* Ink surfaces that carry the lime: the figure and the status chip.
+         Giving them a fixed ink ground is what lets the lime run at full
+         strength on a page that is otherwise all warm paper. */
+      --fig-bg:     #1B1917;   /* opaque fallback for the glass */
+      --fig-line:   #302C28;   /* status chip edge */
+      --fig-text:   #F5F1EB;
+      /* Brightened from #8E8579 to buy contrast headroom: over cream the
+         translucent panel composites to ~#393734, and the old value fell
+         to 3.27:1 there. This holds 5.24:1. */
+      --fig-mute:   #B4ABA0;
+
+      /* Glass. 0.86 is the transparency budget — any thinner and the muted
+         labels drop below 4.5:1 once the cream page shows through. The
+         material reads as glass through its rim light, sheen and the glow
+         it refracts, not through being see-through. */
+      --fig-glass:  rgba(27, 25, 23, 0.86);
+      --fig-rim:    rgba(255, 255, 255, 0.14);
+      --fig-hair:   rgba(255, 255, 255, 0.10);
+      --fig-groove: rgba(0, 0, 0, 0.34);
 
       --mono:  'JetBrains Mono', monospace;
       --sans:  'Inter', sans-serif;
@@ -46,25 +70,9 @@
       --ease:  cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    /* ─── DARK THEME ─── */
-    [data-theme="dark"] {
-      --cream:      #141210;
-      --paper:      #1B1917;
-      --ink:        #F5F1EB;
-      --ink-soft:   #B4ABA0;
-      --ink-mute:   #857D72;
-      --line:       #2E2A27;
-      --accent:     #AFFC41;
-    }
-    [data-theme="dark"] nav.scrolled { background: rgba(20,18,16,0.78); }
-
-    /* smooth cross-fade only while toggling */
-    html.theming, html.theming * {
-      transition: background-color 0.35s ease, border-color 0.35s ease,
-                  color 0.35s ease, fill 0.35s ease, stroke 0.35s ease !important;
-    }
-
-    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    /* Warm paper is the only theme. color-scheme keeps the browser from
+       darkening form controls for viewers whose OS is set to dark. */
+    html { color-scheme: light; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
     body {
       font-family: var(--sans);
       background: var(--cream);
@@ -93,6 +101,7 @@
     .reveal.in { opacity: 1; }
     @media (prefers-reduced-motion: reduce) {
       .reveal { opacity: 1 !important; }
+      .fill, .spark-bar { transition: none !important; }
       html { scroll-behavior: auto; }
     }
 
@@ -148,41 +157,30 @@
       color: var(--ink);
       text-decoration: none;
     }
-    .nav-right { display: flex; align-items: center; gap: 10px; }
-    .theme-toggle {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 34px; height: 34px;
-      border-radius: 8px;
-      border: 1px solid var(--line);
-      background: transparent;
-      color: var(--ink-soft);
-      cursor: pointer;
-      transition: border-color 0.15s, color 0.15s;
-    }
-    .theme-toggle:hover { border-color: var(--ink-mute); color: var(--ink); }
-    .icon-sun { display: none; }
-    [data-theme="dark"] .icon-moon { display: none; }
-    [data-theme="dark"] .icon-sun { display: block; }
 
     /* ─── HERO ─── */
     .hero { padding: 210px 0 150px; }
+    /* An ink chip, so the lime dot has a ground to read against. On bare
+       cream the dot measured 1.06:1 and simply disappeared. */
     .status {
       display: inline-flex;
       align-items: center;
-      gap: 9px;
+      gap: 8px;
+      padding: 6px 13px 6px 11px;
+      border-radius: 100px;
+      background: var(--fig-bg);
+      border: 1px solid var(--fig-line);
       font-family: var(--mono);
-      font-size: 11.5px;
+      font-size: 11px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--ink-mute);
+      color: var(--fig-text);
       margin-bottom: 38px;
     }
     .status .dot {
       width: 6px; height: 6px;
       border-radius: 50%;
-      background: var(--accent-lime);
+      background: var(--lime);
     }
     .hero h1 {
       font-size: clamp(40px, 6.4vw, 76px);
@@ -224,7 +222,7 @@
       align-items: center;
       gap: 8px;
       font-size: 15px;
-      color: var(--accent);
+      color: var(--ink);
       padding: 12px 0;
     }
 
@@ -245,16 +243,18 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 80px;
-      align-items: start;
+      align-items: stretch;
       margin-top: 84px;
     }
     .steps { border-top: 1px solid var(--line); }
     .step { padding: 26px 0; border-bottom: 1px solid var(--line); }
+    /* neutral on paper; the lime counterpart lives on the figure's
+       matching 01/02/03, where it has an ink ground */
     .step-num {
       font-family: var(--mono);
       font-size: 11.5px;
       letter-spacing: 0.08em;
-      color: var(--accent);
+      color: var(--ink-soft);
       margin-bottom: 10px;
     }
     .step h3 {
@@ -272,77 +272,197 @@
 
     /* ─── FIGURE ─── */
     /* One quiet panel, not a product demo: no window chrome, no fake
-       cursor. It exists to show that the limit is a fraction of
-       collateral — nothing more. */
-    .panel {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 30px;
+       cursor. Four zones mirroring the four steps beside it, so the
+       figure carries the same argument as the copy rather than
+       decorating it. The zones flex, which is what makes the panel
+       match the height of the steps column — height comes from content,
+       not from padding stretched to fake the fit. */
+    /* The glow exists so the backdrop-filter has something to refract —
+       glass over a flat colour is just a tinted box. Blurred through the
+       panel it reads as light bending inside the material. Bleed is 18px,
+       inside the 22px page gutter, so it can't cause overflow. */
+    .figure-frame { position: relative; }
+    .fig-glow {
+      position: absolute;
+      inset: -18px;
+      z-index: 0;
+      pointer-events: none;
+      border-radius: 30px;
+      background:
+        radial-gradient(46% 40% at 18% 10%, rgba(175,252,65,0.20), transparent 72%),
+        radial-gradient(52% 44% at 86% 92%, rgba(214,178,88,0.12), transparent 72%);
+      filter: blur(26px);
     }
-    .panel-tag {
+
+    .panel {
+      position: relative;
+      isolation: isolate;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      border-radius: 20px;
+      overflow: hidden;
+      color: var(--fig-text);
+      background: var(--fig-glass);
+      -webkit-backdrop-filter: blur(22px) saturate(1.7);
+      backdrop-filter: blur(22px) saturate(1.7);
+      border: 1px solid var(--fig-rim);
+      box-shadow:
+        0 24px 60px -18px rgba(0,0,0,0.55),
+        0 4px 14px -6px rgba(0,0,0,0.30),
+        inset 0 1px 0 rgba(255,255,255,0.16),
+        inset 0 -1px 0 rgba(255,255,255,0.04);
+    }
+    /* specular sheen — the highlight that makes it read as a lit surface
+       rather than a flat translucent rectangle */
+    .panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(152deg, rgba(255,255,255,0.13) 0%, rgba(255,255,255,0.04) 26%, transparent 52%),
+        radial-gradient(80% 55% at 8% -10%, rgba(255,255,255,0.10), transparent 70%);
+    }
+    .panel > * { position: relative; z-index: 1; }
+
+    /* Opaque wherever the material can't be honoured: no backdrop-filter
+       support, or the viewer has asked for less transparency. */
+    @supports not ((backdrop-filter: blur(2px)) or (-webkit-backdrop-filter: blur(2px))) {
+      .panel { background: var(--fig-bg); }
+    }
+    @media (prefers-reduced-transparency: reduce) {
+      .panel {
+        background: var(--fig-bg);
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+      }
+      .fig-glow { display: none; }
+    }
+
+    .panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 15px 26px;
+      border-bottom: 1px solid var(--fig-hair);
+    }
+    .panel-ref, .panel-tag {
       font-family: var(--mono);
       font-size: 10.5px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--ink-mute);
-      margin-bottom: 26px;
+      color: var(--fig-mute);
     }
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      padding-bottom: 28px;
-      border-bottom: 1px solid var(--line);
+    .zone {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 15px;
+      padding: 26px;
     }
-    .stat-label {
+    .zone + .zone { border-top: 1px solid var(--fig-hair); }
+    .zone-label {
+      display: flex;
+      align-items: center;
+      gap: 9px;
       font-family: var(--mono);
       font-size: 10.5px;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--ink-mute);
-      margin-bottom: 9px;
+      color: var(--fig-mute);
+    }
+    .zone-num { color: var(--lime); }
+    .zone-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
     }
     .stat-val {
-      font-size: 21px;
+      font-size: 23px;
       font-weight: 600;
-      letter-spacing: -0.02em;
-      line-height: 1.2;
+      letter-spacing: -0.022em;
+      line-height: 1.15;
     }
     .stat-val .unit {
       font-family: var(--mono);
       font-size: 11px;
       font-weight: 400;
-      color: var(--ink-mute);
+      color: var(--fig-mute);
       margin-left: 5px;
       letter-spacing: 0;
     }
-    .bars { padding-top: 28px; display: flex; flex-direction: column; gap: 20px; }
+    .zone-note { font-family: var(--mono); font-size: 11px; color: var(--fig-mute); }
+
+    /* proportion bars: the limit as a fraction of collateral */
     .bar-head {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 9px;
-      font-size: 13.5px;
+      gap: 12px;
+      margin-bottom: 8px;
+      font-size: 13px;
     }
-    .bar-name { color: var(--ink-soft); }
-    .bar-amt { font-family: var(--mono); font-size: 12.5px; color: var(--ink); }
+    .bar-name { color: var(--fig-text); }
+    .bar-amt { font-family: var(--mono); font-size: 12px; color: var(--fig-mute); }
+    /* recessed groove rather than an opaque well, so the bars read as
+       inset into the glass */
     .track {
       height: 6px;
       border-radius: 3px;
-      background: var(--cream);
-      border: 1px solid var(--line);
+      background: var(--fig-groove);
+      border: 1px solid var(--fig-hair);
       overflow: hidden;
     }
-    [data-theme="dark"] .track { background: #100E0D; }
     .fill {
       height: 100%;
       width: 0;
       border-radius: 3px;
       transition: width 1.1s var(--ease);
     }
-    .f-collateral { background: var(--ink-mute); }
-    .f-limit { background: var(--accent); }
+    /* collateral is the reference quantity, lime is what Float decides */
+    .f-collateral { background: var(--fig-mute); }
+    .f-limit { background: var(--lime); }
+
+    /* advance rate across repayment cycles — the compounding half of
+       the story, which words alone kept making sound speculative */
+    .spark { display: flex; align-items: flex-end; gap: 5px; height: 58px; }
+    .spark-bar {
+      flex: 1;
+      height: 0;
+      border-radius: 2px;
+      background: var(--lime);
+      transition: height 0.9s var(--ease);
+    }
+    /* ─── THE FORK ─── */
+    /* Graduation is a choice between two levers, not a single outcome, so
+       the zone reads as two columns either side of "or" rather than as a
+       list that implies both happen. */
+    .fork {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 16px;
+      align-items: center;
+    }
+    .fork-opt { display: flex; flex-direction: column; gap: 5px; }
+    .fork-lever {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--fig-mute);
+    }
+    .fork-or {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--fig-mute);
+    }
 
     /* ─── CTA ─── */
     .cta { padding: 150px 0 160px; border-top: 1px solid var(--line); }
@@ -399,22 +519,13 @@
       .cta-row { display: block; }
       .cta-row .btn-ghost { width: 100%; margin-top: 10px; }
       .form .btn { width: auto; }
-      .stats { grid-template-columns: 1fr; gap: 22px; }
-      .panel { padding: 24px; }
+      .panel-head { padding: 14px 22px; }
+      .zone { padding: 22px; }
+      .zone-row { flex-direction: column; align-items: flex-start; gap: 6px; }
+      .fork { grid-template-columns: 1fr; gap: 18px; }
+      .fork-or { text-align: center; }
     }
   </style>
-  <script>
-    // set theme before paint (no flash)
-    (function () {
-      try {
-        var t = localStorage.getItem('float-theme');
-        if (t !== 'dark' && t !== 'light') {
-          t = 'light';
-        }
-        document.documentElement.setAttribute('data-theme', t);
-      } catch (e) {}
-    })();
-  </script>
 </head>
 <body>
 
@@ -431,13 +542,7 @@
     </svg>
     FLOAT
   </a>
-  <div class="nav-right">
-    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle theme">
-      <svg class="icon-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      <svg class="icon-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M2 12h2.5M19.5 12H22M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
-    </button>
-    <a class="btn btn-primary btn-sm" href="mailto:hello@float.builders">Talk to us</a>
-  </div>
+  <a class="btn btn-primary btn-sm" href="mailto:hello@float.builders">Talk to us</a>
 </nav>
 
 <span id="top"></span>
@@ -447,7 +552,7 @@
   <div class="wrap">
     <div class="status reveal"><span class="dot"></span> Private beta</div>
     <h1 class="reveal">Float is building the underwriting layer for agent credit.</h1>
-    <p class="reveal">Collateral-first credit for agents and the operators who run them.</p>
+    <p class="reveal">Secured credit for agents and their operators. Better terms as repayment history builds.</p>
     <div class="reveal">
       <div class="cta-row">
         <form class="form" id="hero-form" onsubmit="return submitWaitlist(event,'hero')">
@@ -467,7 +572,7 @@
     <div class="sec-head reveal">
       <div class="eyebrow">Why it matters</div>
       <h2>Agents can transact. They can't be underwritten.</h2>
-      <p class="lede">An agent has no balance sheet and no track record to price. Credit stalls there — not on the rail that moves the money, but on the decision to extend it.</p>
+      <p class="lede">An agent has no balance sheet and no track record to price. Credit stalls on that decision.</p>
     </div>
   </div>
 </section>
@@ -477,53 +582,98 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="eyebrow">How it works</div>
-      <h2>Collateral first. Reputation over time.</h2>
+      <h2>Start secured. Graduate from there.</h2>
+      <p class="lede">A secured card's path to better terms, with on-chain collateral and a verifiable record.</p>
     </div>
     <div class="how">
       <div>
         <div class="steps reveal">
           <div class="step">
             <div class="step-num">01</div>
-            <h3>Verify</h3>
-            <p>Collateral is confirmed on-chain before any credit is extended.</p>
+            <h3>Post collateral</h3>
+            <p>Verified on-chain before any credit is extended.</p>
           </div>
           <div class="step">
             <div class="step-num">02</div>
-            <h3>Size</h3>
-            <p>The limit is derived from verified collateral — not negotiated on top of it.</p>
+            <h3>Draw on a secured line</h3>
+            <p>Float extends a line matching the collateral, one to one.</p>
           </div>
           <div class="step">
             <div class="step-num">03</div>
-            <h3>Learn</h3>
-            <p>Positions are monitored continuously, and repayment history sharpens the next limit.</p>
+            <h3>Build history</h3>
+            <p>Every repayment on time strengthens the record.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">04</div>
+            <h3>Graduate</h3>
+            <p>A higher line against the same collateral, or the same line against less. In time, part of the exposure moves to unsecured.</p>
           </div>
         </div>
         <p class="steps-note reveal">Edge cases route to a person. No silent approvals.</p>
       </div>
-      <div class="panel reveal">
-        <div class="panel-tag">Illustrative</div>
-        <div class="stats">
-          <div>
-            <div class="stat-label">Collateral</div>
-            <div class="stat-val">$12,000<span class="unit">USDC</span></div>
+      <div class="figure-frame">
+        <div class="fig-glow" aria-hidden="true"></div>
+        <div class="panel reveal">
+          <div class="panel-head">
+            <span class="panel-ref">agent-7f2c</span>
+            <span class="panel-tag">Illustrative</span>
           </div>
-          <div>
-            <div class="stat-label">Advance rate</div>
-            <div class="stat-val">70<span class="unit">%</span></div>
+
+          <div class="zone">
+            <div class="zone-label"><span class="zone-num">01</span> Collateral posted</div>
+            <div class="zone-row">
+              <div class="stat-val">$10,000<span class="unit">USDC</span></div>
+              <span class="zone-note">Verified on-chain</span>
+            </div>
           </div>
-          <div>
-            <div class="stat-label">Limit</div>
-            <div class="stat-val">$8,400</div>
+
+          <div class="zone">
+            <div class="zone-label"><span class="zone-num">02</span> Secured line</div>
+            <div>
+              <div class="bar-head"><span class="bar-name">Collateral</span><span class="bar-amt">$10,000</span></div>
+              <div class="track"><div class="fill f-collateral" data-w="100%"></div></div>
+            </div>
+            <div>
+              <div class="bar-head"><span class="bar-name">Line extended</span><span class="bar-amt">$10,000</span></div>
+              <div class="track"><div class="fill f-limit" data-w="100%"></div></div>
+            </div>
+            <span class="zone-note">One to one — fully secured</span>
           </div>
-        </div>
-        <div class="bars">
-          <div>
-            <div class="bar-head"><span class="bar-name">Collateral verified</span><span class="bar-amt">$12,000</span></div>
-            <div class="track"><div class="fill f-collateral" data-w="100%"></div></div>
+
+          <div class="zone">
+            <div class="zone-label"><span class="zone-num">03</span> Repayment history</div>
+            <div class="spark">
+              <div class="spark-bar" data-h="24%"></div>
+              <div class="spark-bar" data-h="31%" style="transition-delay:.03s"></div>
+              <div class="spark-bar" data-h="38%" style="transition-delay:.06s"></div>
+              <div class="spark-bar" data-h="45%" style="transition-delay:.09s"></div>
+              <div class="spark-bar" data-h="52%" style="transition-delay:.12s"></div>
+              <div class="spark-bar" data-h="59%" style="transition-delay:.15s"></div>
+              <div class="spark-bar" data-h="66%" style="transition-delay:.18s"></div>
+              <div class="spark-bar" data-h="73%" style="transition-delay:.21s"></div>
+              <div class="spark-bar" data-h="80%" style="transition-delay:.24s"></div>
+              <div class="spark-bar" data-h="87%" style="transition-delay:.27s"></div>
+              <div class="spark-bar" data-h="94%" style="transition-delay:.30s"></div>
+              <div class="spark-bar" data-h="100%" style="transition-delay:.33s"></div>
+            </div>
+            <span class="zone-note">12 cycles repaid on time</span>
           </div>
-          <div>
-            <div class="bar-head"><span class="bar-name">Limit sized</span><span class="bar-amt">$8,400</span></div>
-            <div class="track"><div class="fill f-limit" data-w="70%"></div></div>
+
+          <div class="zone">
+            <div class="zone-label"><span class="zone-num">04</span> Graduated</div>
+            <div class="fork">
+              <div class="fork-opt">
+                <div class="fork-lever">Higher line</div>
+                <div class="stat-val">$15,000</div>
+                <span class="zone-note">same $10,000 collateral</span>
+              </div>
+              <div class="fork-or">or</div>
+              <div class="fork-opt">
+                <div class="fork-lever">Less collateral</div>
+                <div class="stat-val">$6,000</div>
+                <span class="zone-note">same $10,000 line</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -582,17 +732,6 @@
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
-  // theme toggle
-  const themeToggle = document.getElementById('theme-toggle');
-  themeToggle.addEventListener('click', () => {
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    const next = isDark ? 'light' : 'dark';
-    document.documentElement.classList.add('theming');
-    document.documentElement.setAttribute('data-theme', next);
-    try { localStorage.setItem('float-theme', next); } catch (e) {}
-    setTimeout(() => document.documentElement.classList.remove('theming'), 400);
-  });
-
   // waitlist
   async function submitWaitlist(e, src) {
     if (e) e.preventDefault();
@@ -623,11 +762,14 @@
   document.querySelectorAll('.reveal').forEach(el => revealIO.observe(el));
 
   // Grow the bars when the panel scrolls into view.
-  // Observe the panel, not the bars: a bar starts at width:0, and a
-  // zero-area target is not reliably reported by IntersectionObserver.
-  // Fill by [data-w] rather than class name so renaming a bar can't
-  // silently orphan it here.
-  const fillBars = root => root.querySelectorAll('[data-w]').forEach(el => { el.style.width = el.dataset.w; });
+  // Observe the panel, not the bars: a bar starts at width/height 0, and
+  // a zero-area target is not reliably reported by IntersectionObserver.
+  // Fill by [data-w]/[data-h] rather than class name so renaming a bar
+  // can't silently orphan it here.
+  const fillBars = root => {
+    root.querySelectorAll('[data-w]').forEach(el => { el.style.width = el.dataset.w; });
+    root.querySelectorAll('[data-h]').forEach(el => { el.style.height = el.dataset.h; });
+  };
   if (!('IntersectionObserver' in window)) {
     fillBars(document);
   } else {
