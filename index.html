@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Float — The underwriting layer for agent credit.</title>
-  <meta name="description" content="Float is building the underwriting layer for agent credit. Collateral-first credit for crypto-native agents and operators." />
+  <title>Float — The underwriting layer for agent credit</title>
+  <meta name="description" content="Float is building the underwriting layer for agent credit. Collateral-first credit for agents and the operators who run them." />
   <!-- Open Graph -->
-  <meta property="og:title" content="Float — The underwriting layer for agent credit." />
-  <meta property="og:description" content="Collateral-first credit for crypto-native agents and operators. Float sizes limits, monitors risk, and learns from repayment behavior over time." />
+  <meta property="og:title" content="Float — The underwriting layer for agent credit" />
+  <meta property="og:description" content="Float is building the underwriting layer for agent credit. Collateral-first credit for agents and the operators who run them." />
   <meta property="og:image" content="https://float.builders/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -15,8 +15,8 @@
   <meta property="og:type" content="website" />
   <!-- Twitter / iMessage -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Float — The underwriting layer for agent credit." />
-  <meta name="twitter:description" content="Collateral-first credit for crypto-native agents and operators. Float sizes limits, monitors risk, and learns from repayment behavior over time." />
+  <meta name="twitter:title" content="Float — The underwriting layer for agent credit" />
+  <meta name="twitter:description" content="Float is building the underwriting layer for agent credit. Collateral-first credit for agents and the operators who run them." />
   <meta name="twitter:image" content="https://float.builders/og-image.png" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'><circle cx='12' cy='12' r='10' stroke='%23affc41' stroke-width='2'/><circle cx='12' cy='12' r='4' stroke='%23affc41' stroke-width='2'/><line x1='8.8' y1='8.8' x2='5.5' y2='5.5' stroke='%23affc41' stroke-width='2' stroke-linecap='round'/><line x1='15.2' y1='8.8' x2='18.5' y2='5.5' stroke='%23affc41' stroke-width='2' stroke-linecap='round'/><line x1='15.2' y1='15.2' x2='18.5' y2='18.5' stroke='%23affc41' stroke-width='2' stroke-linecap='round'/><line x1='8.8' y1='15.2' x2='5.5' y2='18.5' stroke='%23affc41' stroke-width='2' stroke-linecap='round'/></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -26,55 +26,37 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      /* light zone (warm paper) */
+      /* warm paper */
       --cream:      #F0ECE6;
       --paper:      #FBF9F5;
       --ink:        #1B1917;
       --ink-soft:   #4B463F;
       --ink-mute:   #857D72;
       --line:       #DCD6CB;
-      --line-soft:  #E6E1D8;
 
-      /* dark zone */
-      --bg:         #171513;
-      --bg2:        #201E1C;
-      --border:     #33302C;
-      --text:       #F5F1EB;
-      --muted:      #A79E92;
-      --muted2:     #6E675E;
-
-      /* Original Float lime, used sparingly. --accent-dim is the
-         full-strength brand colour and appears on dark backgrounds in
-         either theme, so it is deliberately NOT overridden below. On
-         cream, full lime is unreadable — hence the deeper --accent. */
+      /* Original Float lime. On cream, full lime is unreadable — hence the
+         deeper --accent for anything that carries meaning as text. Lime
+         itself is reserved for small non-text marks. */
       --accent:     #3F6B12;
-      --accent-mid: #639324;
-      --accent-dim: #AFFC41;
+      --accent-lime:#AFFC41;
 
       --mono:  'JetBrains Mono', monospace;
       --sans:  'Inter', sans-serif;
 
       --ease:  cubic-bezier(0.16, 1, 0.3, 1);
-      --shadow-sm: 0 1px 2px rgba(27,25,23,0.04), 0 4px 16px rgba(27,25,23,0.05);
     }
 
-    /* ─── DARK THEME (site-wide) ─── */
+    /* ─── DARK THEME ─── */
     [data-theme="dark"] {
       --cream:      #141210;
-      --paper:      #1C1A18;
+      --paper:      #1B1917;
       --ink:        #F5F1EB;
       --ink-soft:   #B4ABA0;
       --ink-mute:   #857D72;
       --line:       #2E2A27;
-      --line-soft:  #262320;
       --accent:     #AFFC41;
-      --accent-mid: #AFFC41;
-      --shadow-sm:  0 1px 2px rgba(0,0,0,0.30), 0 4px 16px rgba(0,0,0,0.25);
     }
-    [data-theme="dark"] nav.scrolled {
-      background: rgba(20,18,16,0.78);
-      border-bottom-color: var(--line);
-    }
+    [data-theme="dark"] nav.scrolled { background: rgba(20,18,16,0.78); }
 
     /* smooth cross-fade only while toggling */
     html.theming, html.theming * {
@@ -92,8 +74,7 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
-    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
-    .wrap-narrow { max-width: 780px; margin: 0 auto; padding: 0 32px; }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 32px; }
 
     .eyebrow {
       font-family: var(--mono);
@@ -102,19 +83,16 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--ink-mute);
-      margin-bottom: 24px;
+      margin-bottom: 26px;
     }
-    .dark .eyebrow { color: var(--muted); }
 
     /* ─── REVEAL ─── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(18px);
-      transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
-    }
-    .reveal.in { opacity: 1; transform: none; }
+    /* Deliberately subtle: a short fade, no travel. Movement reads as
+       promotional; this should feel like the page was always there. */
+    .reveal { opacity: 0; transition: opacity 0.8s var(--ease); }
+    .reveal.in { opacity: 1; }
     @media (prefers-reduced-motion: reduce) {
-      .reveal { opacity: 1 !important; transform: none !important; }
+      .reveal { opacity: 1 !important; }
       html { scroll-behavior: auto; }
     }
 
@@ -135,15 +113,11 @@
       transition: background 0.18s, color 0.18s, border-color 0.18s, opacity 0.18s;
       white-space: nowrap;
     }
-    /* compact variant — matches the 34px theme toggle in the nav */
-    .btn-sm { height: 34px; padding: 0 15px; font-size: 13.5px; border-radius: 8px; }
+    .btn-sm { height: 34px; padding: 0 15px; font-size: 13.5px; }
     .btn-primary { background: var(--ink); color: var(--cream); }
     .btn-primary:hover { opacity: 0.86; }
     .btn-ghost { background: transparent; color: var(--ink); border-color: var(--line); }
     .btn-ghost:hover { border-color: var(--ink-mute); }
-    .dark .btn-primary { background: var(--text); color: var(--bg); }
-    .dark .btn-ghost { color: var(--text); border-color: var(--border); }
-    .dark .btn-ghost:hover { border-color: var(--muted); }
 
     /* ─── NAV ─── */
     nav {
@@ -153,7 +127,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 18px 32px;
+      padding: 20px 32px;
       transition: background 0.3s, backdrop-filter 0.3s, border-color 0.3s, padding 0.3s;
       border-bottom: 1px solid transparent;
     }
@@ -161,8 +135,8 @@
       background: rgba(240,236,230,0.80);
       backdrop-filter: blur(18px) saturate(1.3);
       -webkit-backdrop-filter: blur(18px) saturate(1.3);
-      border-bottom: 1px solid var(--line);
-      padding: 12px 32px;
+      border-bottom-color: var(--line);
+      padding: 13px 32px;
     }
     .nav-logo {
       display: inline-flex;
@@ -174,15 +148,6 @@
       color: var(--ink);
       text-decoration: none;
     }
-    .nav-links { display: flex; gap: 30px; }
-    .nav-links a {
-      font-size: 14px;
-      font-weight: 450;
-      color: var(--ink-soft);
-      text-decoration: none;
-      transition: color 0.15s;
-    }
-    .nav-links a:hover { color: var(--ink); }
     .nav-right { display: flex; align-items: center; gap: 10px; }
     .theme-toggle {
       display: inline-flex;
@@ -200,12 +165,10 @@
     .icon-sun { display: none; }
     [data-theme="dark"] .icon-moon { display: none; }
     [data-theme="dark"] .icon-sun { display: block; }
-    @media (max-width: 900px) { .nav-links { display: none; } }
 
     /* ─── HERO ─── */
-    .hero { padding: 190px 0 120px; }
-    .hero-inner { max-width: 900px; }
-    .hero .status {
+    .hero { padding: 210px 0 150px; }
+    .status {
       display: inline-flex;
       align-items: center;
       gap: 9px;
@@ -214,31 +177,31 @@
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--ink-mute);
-      margin-bottom: 34px;
+      margin-bottom: 38px;
     }
     .status .dot {
       width: 6px; height: 6px;
       border-radius: 50%;
-      background: var(--accent-mid);
+      background: var(--accent-lime);
     }
     .hero h1 {
-      font-size: clamp(40px, 6.2vw, 78px);
-      font-weight: 700;
-      letter-spacing: -0.035em;
-      line-height: 1.03;
-      margin-bottom: 30px;
-      max-width: 15ch;
+      font-size: clamp(40px, 6.4vw, 76px);
+      font-weight: 600;
+      letter-spacing: -0.038em;
+      line-height: 1.04;
+      max-width: 17ch;
+      margin-bottom: 32px;
     }
-    .hero-sub {
+    .hero p {
       font-size: clamp(17px, 1.7vw, 20px);
       color: var(--ink-soft);
-      max-width: 56ch;
-      line-height: 1.6;
-      margin-bottom: 44px;
+      max-width: 44ch;
+      margin-bottom: 46px;
     }
 
+    /* ─── WAITLIST FORM ─── */
     .cta-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-    .form { display: flex; gap: 8px; width: 100%; max-width: 420px; }
+    .form { display: flex; gap: 8px; width: 100%; max-width: 400px; }
     .form input {
       flex: 1;
       padding: 12px 15px;
@@ -253,8 +216,8 @@
     }
     .form input::placeholder { color: var(--ink-mute); }
     .form input:focus {
-      border-color: var(--accent-mid);
-      box-shadow: 0 0 0 3px rgba(175,252,65,0.30);
+      border-color: var(--ink-mute);
+      box-shadow: 0 0 0 3px rgba(133,125,114,0.16);
     }
     .form-success {
       display: none;
@@ -264,361 +227,180 @@
       color: var(--accent);
       padding: 12px 0;
     }
-    .form-note { font-size: 13.5px; color: var(--ink-mute); margin-top: 18px; }
-    .dark .form-note { color: var(--muted); }
-    .dark .form input { background: var(--bg2); border-color: var(--border); color: var(--text); }
-    .dark .form-success { color: var(--accent-dim); }
 
-    /* ─── SECTION SCAFFOLD ─── */
-    section { position: relative; }
-    .sec-pad { padding: 130px 0; }
-    .rule { height: 1px; background: var(--line); }
-    .sec-head { max-width: 640px; margin-bottom: 72px; }
+    /* ─── SECTIONS ─── */
+    .sec { padding: 150px 0; border-top: 1px solid var(--line); }
+    .sec-head { max-width: 660px; }
     .sec-head h2 {
-      font-size: clamp(29px, 3.6vw, 44px);
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      line-height: 1.1;
-      margin-bottom: 18px;
+      font-size: clamp(28px, 3.6vw, 44px);
+      font-weight: 600;
+      letter-spacing: -0.032em;
+      line-height: 1.12;
+      margin-bottom: 24px;
     }
-    .sec-head p { font-size: 17.5px; color: var(--ink-soft); line-height: 1.6; }
-    .dark .sec-head p { color: var(--muted); }
+    .lede { font-size: clamp(17px, 1.8vw, 20px); color: var(--ink-soft); }
 
-    /* ─── WHAT FLOAT DOES ─── */
-    .do-grid {
+    /* ─── HOW IT WORKS ─── */
+    .how {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      column-gap: 40px;
-      row-gap: 0;
-      border-top: 1px solid var(--line);
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      margin-top: 84px;
     }
-    .do-item { padding: 34px 0 38px; border-bottom: 1px solid var(--line); }
-    .do-num {
+    .steps { border-top: 1px solid var(--line); }
+    .step { padding: 26px 0; border-bottom: 1px solid var(--line); }
+    .step-num {
       font-family: var(--mono);
       font-size: 11.5px;
-      color: var(--accent-mid);
       letter-spacing: 0.08em;
-      margin-bottom: 16px;
+      color: var(--accent);
+      margin-bottom: 10px;
     }
-    .do-item h3 {
-      font-size: 19px;
+    .step h3 {
+      font-size: 18px;
       font-weight: 600;
       letter-spacing: -0.015em;
-      margin-bottom: 9px;
+      margin-bottom: 7px;
     }
-    .do-item p { font-size: 15.5px; color: var(--ink-soft); line-height: 1.58; }
-
-    /* ─── FIGURES: claim on one side, evidence on the other ─── */
-    .figure {
-      display: grid;
-      grid-template-columns: 0.82fr 1.18fr;
-      gap: 64px;
-      align-items: center;
-    }
-    .figure-copy h2 {
-      font-size: clamp(28px, 3.3vw, 40px);
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      line-height: 1.12;
-      margin-bottom: 18px;
-    }
-    .figure-copy p { font-size: 17px; color: var(--ink-soft); line-height: 1.62; }
-    .figure-copy p + p { margin-top: 16px; }
-    .dark .figure-copy p { color: var(--muted); }
-    .figure-note {
-      margin-top: 26px;
-      padding-top: 22px;
-      border-top: 1px solid var(--line);
+    .step p { font-size: 15.5px; color: var(--ink-soft); line-height: 1.56; }
+    .steps-note {
       font-size: 14.5px;
       color: var(--ink-mute);
-      line-height: 1.55;
+      margin-top: 26px;
     }
-    .dark .figure-note { border-top-color: var(--border); color: var(--muted2); }
 
-    /* ── product-surface card ── */
-    .card {
+    /* ─── FIGURE ─── */
+    /* One quiet panel, not a product demo: no window chrome, no fake
+       cursor. It exists to show that the limit is a fraction of
+       collateral — nothing more. */
+    .panel {
       background: var(--paper);
       border: 1px solid var(--line);
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: var(--shadow-sm);
+      border-radius: 12px;
+      padding: 30px;
     }
-    .dark .card { background: var(--bg2); border-color: var(--border); box-shadow: none; }
-
-    /* window chrome */
-    .win-bar {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      padding: 12px 18px;
-      border-bottom: 1px solid var(--line);
-      background: rgba(27,25,23,0.02);
-    }
-    .dark .win-bar { background: rgba(0,0,0,0.22); border-bottom-color: var(--border); }
-    .win-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--line); flex-shrink: 0; }
-    .dark .win-dot { background: var(--border); }
-    .win-path { font-family: var(--mono); font-size: 11.5px; color: var(--ink-mute); margin-left: 10px; }
-    .dark .win-path { color: var(--muted2); }
-    .win-tag { margin-left: auto; }
-
-    .tag {
+    .panel-tag {
       font-family: var(--mono);
-      font-size: 9.5px;
-      letter-spacing: 0.1em;
+      font-size: 10.5px;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--ink-mute);
-      border: 1px solid var(--line);
-      border-radius: 100px;
-      padding: 3px 9px;
-      white-space: nowrap;
+      margin-bottom: 26px;
     }
-    .dark .tag { color: var(--muted2); border-color: var(--border); }
-
-    /* stat blocks */
-    .stat-row { display: grid; border-bottom: 1px solid var(--line); }
-    .dark .stat-row { border-bottom-color: var(--border); }
-    .stat-row.c2 { grid-template-columns: 1fr 1fr; }
-    .stat-row.c3 { grid-template-columns: repeat(3, 1fr); }
-    .stat { padding: 19px 22px; border-right: 1px solid var(--line); }
-    .dark .stat { border-right-color: var(--border); }
-    .stat:last-child { border-right: none; }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--line);
+    }
     .stat-label {
       font-family: var(--mono);
-      font-size: 9.5px;
-      letter-spacing: 0.11em;
+      font-size: 10.5px;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--ink-mute);
       margin-bottom: 9px;
     }
-    .dark .stat-label { color: var(--muted2); }
-    .stat-val { font-size: 25px; font-weight: 600; letter-spacing: -0.025em; line-height: 1.05; }
-    .dark .stat-val { color: var(--text); }
-    .stat-val .unit { font-size: 12px; font-weight: 400; color: var(--ink-mute); margin-left: 5px; letter-spacing: 0; }
-    .stat-val .unit.pct { font-size: 17px; margin-left: 1px; }
-    .dark .stat-val .unit { color: var(--muted2); }
-    .stat-sub { font-family: var(--mono); font-size: 11.5px; color: var(--ink-mute); margin-top: 7px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .dark .stat-sub { color: var(--muted2); }
-    .stat-sub.pos { color: var(--accent); }
-    .dark .stat-sub.pos { color: var(--accent-dim); }
-
-    /* status pills */
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11.5px;
-      font-weight: 500;
-      border-radius: 100px;
-      padding: 4px 10px;
-      white-space: nowrap;
+    .stat-val {
+      font-size: 21px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
     }
-    .pill::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
-    .pill-ok { background: rgba(99,147,36,0.20); color: var(--accent); }
-    .pill-watch { background: rgba(133,125,114,0.16); color: var(--ink-soft); }
-    .dark .pill-ok { background: rgba(175,252,65,0.15); color: var(--accent-dim); }
-    .dark .pill-watch { background: rgba(255,255,255,0.07); color: var(--muted); }
-
-    /* shared-scale sizing bars */
-    .scale { padding: 22px 22px 24px; }
-    .scale-row { margin-bottom: 18px; }
-    .scale-row:last-child { margin-bottom: 0; }
-    .scale-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 8px; }
-    .scale-name { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.11em; text-transform: uppercase; color: var(--ink-mute); }
-    .dark .scale-name { color: var(--muted2); }
-    .scale-amt { font-family: var(--mono); font-size: 14px; color: var(--ink); }
-    .dark .scale-amt { color: var(--text); }
-    .scale-track {
-      height: 30px;
-      border-radius: 7px;
+    .stat-val .unit {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--ink-mute);
+      margin-left: 5px;
+      letter-spacing: 0;
+    }
+    .bars { padding-top: 28px; display: flex; flex-direction: column; gap: 20px; }
+    .bar-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 9px;
+      font-size: 13.5px;
+    }
+    .bar-name { color: var(--ink-soft); }
+    .bar-amt { font-family: var(--mono); font-size: 12.5px; color: var(--ink); }
+    .track {
+      height: 6px;
+      border-radius: 3px;
       background: var(--cream);
       border: 1px solid var(--line);
       overflow: hidden;
     }
-    .dark .scale-track { background: rgba(0,0,0,0.24); border-color: var(--border); }
-    .scale-fill { height: 100%; width: 0; transition: width 1.1s var(--ease); }
-    .f-collateral { background: rgba(99,147,36,0.26); }
-    .f-limit { background: rgba(99,147,36,0.58); }
-    .f-drawn { background: var(--accent-mid); }
-    .dark .f-collateral { background: rgba(175,252,65,0.16); }
-    .dark .f-limit { background: rgba(175,252,65,0.40); }
-    .dark .f-drawn { background: var(--accent-dim); }
-    .legend { display: flex; gap: 20px; padding: 14px 22px; border-top: 1px solid var(--line); }
-    .dark .legend { border-top-color: var(--border); }
-    .legend-item { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 11px; color: var(--ink-mute); }
-    .dark .legend-item { color: var(--muted2); }
-    .legend-key { width: 14px; height: 8px; border-radius: 2px; flex-shrink: 0; }
-
-    /* portfolio table */
-    .card-scroll { overflow-x: auto; }
-    .tbl { width: 100%; border-collapse: collapse; min-width: 470px; }
-    .tbl th {
-      font-family: var(--mono);
-      font-size: 9.5px;
-      font-weight: 500;
-      letter-spacing: 0.11em;
-      text-transform: uppercase;
-      color: var(--ink-mute);
-      text-align: left;
-      padding: 12px 16px;
-      border-bottom: 1px solid var(--line);
-      white-space: nowrap;
+    [data-theme="dark"] .track { background: #100E0D; }
+    .fill {
+      height: 100%;
+      width: 0;
+      border-radius: 3px;
+      transition: width 1.1s var(--ease);
     }
-    .tbl td { padding: 13px 16px; border-bottom: 1px solid var(--line-soft); font-size: 14px; vertical-align: middle; }
-    .tbl tr:last-child td { border-bottom: none; }
-    .tbl .agent { font-family: var(--mono); font-size: 12.5px; color: var(--ink); white-space: nowrap; }
-    .tbl .num { font-family: var(--mono); font-size: 13px; color: var(--ink-soft); white-space: nowrap; }
-    .dark .tbl th { color: var(--muted2); border-bottom-color: var(--border); }
-    .dark .tbl td { border-bottom-color: var(--border); }
-    .dark .tbl .agent { color: var(--text); }
-    .dark .tbl .num { color: var(--muted); }
-    .util { display: flex; align-items: center; gap: 9px; }
-    .util-track { width: 42px; height: 5px; border-radius: 3px; background: var(--line); flex-shrink: 0; overflow: hidden; }
-    .util-fill { height: 100%; border-radius: 3px; background: var(--accent-mid); width: 0; transition: width 0.9s var(--ease); }
-    .dark .util-track { background: var(--border); }
-    .dark .util-fill { background: var(--accent-dim); }
-    .util-fill.hot { background: var(--ink-mute); }
-    .dark .util-fill.hot { background: var(--muted); }
-    tr.flagged td { background: rgba(99,147,36,0.075); }
-    .dark tr.flagged td { background: rgba(255,255,255,0.032); }
-    tr.flagged td:first-child { box-shadow: inset 2px 0 0 var(--accent-mid); }
-    .dark tr.flagged td:first-child { box-shadow: inset 2px 0 0 var(--accent-dim); }
-
-    /* advance-rate chart */
-    .chart-wrap { padding: 20px 22px 18px; }
-    .chart { width: 100%; height: 150px; display: block; }
-    .chart .axis { stroke: var(--line); stroke-width: 1; }
-    .dark .chart .axis { stroke: var(--border); }
-    .chart .grid-line { stroke: var(--line); stroke-width: 1; stroke-dasharray: 3 4; opacity: 0.75; }
-    .dark .chart .grid-line { stroke: var(--border); }
-    .chart .step-line { fill: none; stroke: var(--accent-mid); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
-    .dark .chart .step-line { stroke: var(--accent-dim); }
-    .chart .step-area { fill: rgba(99,147,36,0.16); }
-    .dark .chart .step-area { fill: rgba(175,252,65,0.10); }
-    .chart .lbl { font-family: var(--mono); font-size: 9px; fill: var(--ink-mute); }
-    .dark .chart .lbl { fill: var(--muted2); }
-    .chart .dot { fill: var(--paper); stroke: var(--accent-mid); stroke-width: 2.5; }
-    .dark .chart .dot { fill: var(--bg2); stroke: var(--accent-dim); }
-    .cycles-block { padding: 16px 22px 18px; border-top: 1px solid var(--line); }
-    .dark .cycles-block { border-top-color: var(--border); }
-    .cycles { display: flex; gap: 3px; }
-    .tick { flex: 1; height: 18px; border-radius: 2px; background: var(--line); }
-    .dark .tick { background: var(--border); }
-    .tick.on { background: var(--accent-mid); opacity: 0.5; }
-    .dark .tick.on { background: var(--accent-dim); opacity: 0.55; }
-    .cycles-note { display: flex; justify-content: space-between; margin-top: 11px; font-family: var(--mono); font-size: 11px; color: var(--ink-mute); }
-    .dark .cycles-note { color: var(--muted2); }
-
-    /* ─── DARK ZONE ─── */
-    .dark { background: var(--bg); color: var(--text); }
-    .dark-round { border-radius: 22px; }
-    .approach-wrap { padding: 0 32px; max-width: 1144px; margin: 0 auto; }
-
-    /* ─── DIFFERENT ─── */
-    .diff-list { display: flex; flex-direction: column; border-top: 1px solid var(--line); }
-    .diff-row {
-      display: grid;
-      grid-template-columns: 34px 1fr 1.25fr;
-      gap: 28px;
-      align-items: baseline;
-      padding: 34px 0;
-      border-bottom: 1px solid var(--line);
-    }
-    .diff-idx { font-family: var(--mono); font-size: 12px; color: var(--ink-mute); }
-    .diff-row h3 {
-      font-size: 21px;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      line-height: 1.25;
-    }
-    .diff-row p { font-size: 16px; color: var(--ink-soft); line-height: 1.6; }
+    .f-collateral { background: var(--ink-mute); }
+    .f-limit { background: var(--accent); }
 
     /* ─── CTA ─── */
-    .cta { padding: 118px 0; text-align: center; }
-    .cta-inner { max-width: 620px; margin: 0 auto; padding: 0 32px; }
+    .cta { padding: 150px 0 160px; border-top: 1px solid var(--line); }
     .cta h2 {
-      font-size: clamp(30px, 4vw, 46px);
-      font-weight: 700;
+      font-size: clamp(28px, 3.6vw, 44px);
+      font-weight: 600;
       letter-spacing: -0.032em;
-      line-height: 1.1;
-      margin-bottom: 18px;
+      line-height: 1.12;
+      margin-bottom: 20px;
+      max-width: 20ch;
     }
-    .cta p { font-size: 17.5px; color: var(--muted); margin-bottom: 38px; }
-    .cta .cta-row { justify-content: center; }
-    .cta .form { margin: 0 auto; }
-    .cta .form-success { justify-content: center; }
+    .cta p { font-size: 17.5px; color: var(--ink-soft); max-width: 46ch; margin-bottom: 40px; }
 
     /* ─── FOOTER ─── */
-    footer { background: var(--cream); border-top: 1px solid var(--line); padding: 68px 0 0; }
+    footer { border-top: 1px solid var(--line); padding: 48px 0; }
     .footer-inner {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 0 32px 52px;
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      gap: 48px;
+      gap: 28px;
       flex-wrap: wrap;
     }
-    .footer-brand { max-width: 330px; }
     .footer-logo {
       display: inline-flex;
       align-items: center;
       gap: 9px;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 600;
       letter-spacing: 0.02em;
       color: var(--ink);
-      margin-bottom: 14px;
     }
-    .footer-tag { font-size: 14.5px; color: var(--ink-mute); line-height: 1.6; }
-    .footer-cols { display: flex; gap: 64px; flex-wrap: wrap; }
-    .footer-col h4 {
-      font-family: var(--mono);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--ink-mute);
-      margin-bottom: 16px;
-    }
-    .footer-col a {
-      display: block;
-      font-size: 14.5px;
+    .footer-links { display: flex; gap: 26px; flex-wrap: wrap; }
+    .footer-links a {
+      font-size: 14px;
       color: var(--ink-soft);
       text-decoration: none;
-      margin-bottom: 10px;
       transition: color 0.15s;
     }
-    .footer-col a:hover { color: var(--ink); }
-    .footer-bottom {
-      border-top: 1px solid var(--line);
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 22px 32px;
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    .footer-bottom .site { font-family: var(--mono); font-size: 13px; color: var(--ink-soft); }
-    .footer-copy { font-size: 13px; color: var(--ink-mute); }
+    .footer-links a:hover { color: var(--ink); }
+    .footer-copy { font-family: var(--mono); font-size: 11.5px; color: var(--ink-mute); }
 
     /* ─── RESPONSIVE ─── */
-    @media (max-width: 980px) {
-      .do-grid { grid-template-columns: repeat(2, 1fr); column-gap: 32px; }
-      .figure { grid-template-columns: 1fr; gap: 44px; }
+    @media (max-width: 860px) {
+      .how { grid-template-columns: 1fr; gap: 56px; }
     }
-    @media (max-width: 680px) {
-      .wrap, .wrap-narrow { padding: 0 22px; }
-      .approach-wrap { padding: 0 22px; }
-      .hero { padding: 150px 0 92px; }
-      .sec-pad { padding: 88px 0; }
-      .sec-head { margin-bottom: 52px; }
-      .do-grid { grid-template-columns: 1fr; }
-      .diff-row { grid-template-columns: 1fr; gap: 10px; padding: 28px 0; }
-      .diff-idx { display: none; }
-      .form { flex-direction: column; max-width: 100%; }
-      .form .btn { width: 100%; }
-      .cta { padding: 88px 0; }
+    @media (max-width: 640px) {
+      .wrap { padding: 0 22px; }
+      nav, nav.scrolled { padding-left: 22px; padding-right: 22px; }
+      .hero { padding: 150px 0 100px; }
+      .hero h1 { max-width: none; }
+      .sec { padding: 100px 0; }
+      .cta { padding: 100px 0 110px; }
+      .form { max-width: none; }
+      .cta-row { display: block; }
+      .cta-row .btn-ghost { width: 100%; margin-top: 10px; }
+      .form .btn { width: auto; }
+      .stats { grid-template-columns: 1fr; gap: 22px; }
+      .panel { padding: 24px; }
     }
   </style>
   <script>
@@ -627,7 +409,7 @@
       try {
         var t = localStorage.getItem('float-theme');
         if (t !== 'dark' && t !== 'light') {
-          t = 'dark';
+          t = 'light';
         }
         document.documentElement.setAttribute('data-theme', t);
       } catch (e) {}
@@ -649,12 +431,6 @@
     </svg>
     FLOAT
   </a>
-  <div class="nav-links">
-    <a href="#sizing">Sizing</a>
-    <a href="#what">What Float does</a>
-    <a href="#reputation">Over time</a>
-    <a href="#why">Why Float</a>
-  </div>
   <div class="nav-right">
     <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle theme">
       <svg class="icon-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -669,339 +445,116 @@
 <!-- HERO -->
 <section class="hero">
   <div class="wrap">
-    <div class="hero-inner">
-      <div class="status reveal"><span class="dot"></span> Private beta</div>
-      <h1 class="reveal" style="transition-delay:.05s">Float is building the underwriting layer for agent credit.</h1>
-      <p class="hero-sub reveal" style="transition-delay:.1s">
-        Collateral-first credit for crypto-native agents and operators. Float sizes limits, monitors risk, and learns from repayment behavior over time.
-      </p>
-      <div class="reveal" style="transition-delay:.15s">
-        <div class="cta-row">
-          <form class="form" id="hero-form" onsubmit="return submitWaitlist(event,'hero')">
-            <input type="email" placeholder="you@company.com" id="hero-email" autocomplete="email" aria-label="Email address" />
-            <button type="submit" class="btn btn-primary">Join the waitlist</button>
-          </form>
-          <a class="btn btn-ghost" href="mailto:hello@float.builders">Talk to us</a>
-        </div>
-        <div class="form-success" id="hero-success">✓ You're on the list — we'll be in touch soon.</div>
-        <div class="form-note">For agents and operators who need credit before cash flow arrives.</div>
+    <div class="status reveal"><span class="dot"></span> Private beta</div>
+    <h1 class="reveal">Float is building the underwriting layer for agent credit.</h1>
+    <p class="reveal">Collateral-first credit for agents and the operators who run them.</p>
+    <div class="reveal">
+      <div class="cta-row">
+        <form class="form" id="hero-form" onsubmit="return submitWaitlist(event,'hero')">
+          <input type="email" placeholder="you@company.com" id="hero-email" autocomplete="email" aria-label="Email address" />
+          <button type="submit" class="btn btn-primary">Join the waitlist</button>
+        </form>
+        <a class="btn btn-ghost" href="mailto:hello@float.builders">Talk to us</a>
       </div>
+      <div class="form-success" id="hero-success">✓ You're on the list — we'll be in touch soon.</div>
     </div>
   </div>
 </section>
 
-<!-- SIZING: the core mechanic -->
-<section class="sec-pad" id="sizing">
+<!-- WHY IT MATTERS -->
+<section class="sec" id="why">
   <div class="wrap">
-    <div class="figure">
-      <div class="figure-copy reveal">
-        <div class="eyebrow">Sizing</div>
-        <h2>Every limit traces back to collateral we verified.</h2>
-        <p>Float doesn't extend credit against a promise or a projection. A line starts from collateral it can confirm on-chain, and the limit is derived from it — not negotiated on top of it.</p>
-        <p>That derivation is the product. It's what makes the risk legible on day one, before an agent has any history at all.</p>
-        <div class="figure-note">Read the bars on one scale: the limit is a fraction of verified collateral, and what's drawn is a fraction of the limit.</div>
-      </div>
-      <div class="card reveal" style="transition-delay:.1s">
-        <div class="win-bar">
-          <span class="win-dot"></span><span class="win-dot"></span><span class="win-dot"></span>
-          <span class="win-path">float.builders/agents/7f2c</span>
-          <span class="tag win-tag">Illustrative</span>
+    <div class="sec-head reveal">
+      <div class="eyebrow">Why it matters</div>
+      <h2>Agents can transact. They can't be underwritten.</h2>
+      <p class="lede">An agent has no balance sheet and no track record to price. Credit stalls there — not on the rail that moves the money, but on the decision to extend it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="sec" id="how">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">How it works</div>
+      <h2>Collateral first. Reputation over time.</h2>
+    </div>
+    <div class="how">
+      <div>
+        <div class="steps reveal">
+          <div class="step">
+            <div class="step-num">01</div>
+            <h3>Verify</h3>
+            <p>Collateral is confirmed on-chain before any credit is extended.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">02</div>
+            <h3>Size</h3>
+            <p>The limit is derived from verified collateral — not negotiated on top of it.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">03</div>
+            <h3>Learn</h3>
+            <p>Positions are monitored continuously, and repayment history sharpens the next limit.</p>
+          </div>
         </div>
-        <div class="stat-row c3">
-          <div class="stat">
-            <div class="stat-label">Collateral verified</div>
+        <p class="steps-note reveal">Edge cases route to a person. No silent approvals.</p>
+      </div>
+      <div class="panel reveal">
+        <div class="panel-tag">Illustrative</div>
+        <div class="stats">
+          <div>
+            <div class="stat-label">Collateral</div>
             <div class="stat-val">$12,000<span class="unit">USDC</span></div>
-            <div class="stat-sub">confirmed on-chain</div>
           </div>
-          <div class="stat">
+          <div>
             <div class="stat-label">Advance rate</div>
-            <div class="stat-val">70<span class="unit pct">%</span></div>
-            <div class="stat-sub">at zero history</div>
+            <div class="stat-val">70<span class="unit">%</span></div>
           </div>
-          <div class="stat">
-            <div class="stat-label">Limit sized</div>
+          <div>
+            <div class="stat-label">Limit</div>
             <div class="stat-val">$8,400</div>
-            <div class="stat-sub pos">$5,250 available</div>
           </div>
         </div>
-        <div class="scale">
-          <div class="scale-row">
-            <div class="scale-head"><span class="scale-name">Collateral</span><span class="scale-amt">$12,000</span></div>
-            <div class="scale-track"><div class="scale-fill f-collateral" data-w="100%"></div></div>
+        <div class="bars">
+          <div>
+            <div class="bar-head"><span class="bar-name">Collateral verified</span><span class="bar-amt">$12,000</span></div>
+            <div class="track"><div class="fill f-collateral" data-w="100%"></div></div>
           </div>
-          <div class="scale-row">
-            <div class="scale-head"><span class="scale-name">Limit</span><span class="scale-amt">$8,400</span></div>
-            <div class="scale-track"><div class="scale-fill f-limit" data-w="70%"></div></div>
+          <div>
+            <div class="bar-head"><span class="bar-name">Limit sized</span><span class="bar-amt">$8,400</span></div>
+            <div class="track"><div class="fill f-limit" data-w="70%"></div></div>
           </div>
-          <div class="scale-row">
-            <div class="scale-head"><span class="scale-name">Drawn</span><span class="scale-amt">$3,150</span></div>
-            <div class="scale-track"><div class="scale-fill f-drawn" data-w="26.25%"></div></div>
-          </div>
-        </div>
-        <div class="legend">
-          <span class="legend-item"><span class="legend-key f-collateral"></span>Collateral</span>
-          <span class="legend-item"><span class="legend-key f-limit"></span>Limit</span>
-          <span class="legend-item"><span class="legend-key f-drawn"></span>Drawn</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<div class="wrap"><div class="rule"></div></div>
-
-
-<!-- WHAT FLOAT DOES -->
-<section class="sec-pad" id="what">
+<!-- CTA -->
+<section class="cta">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="eyebrow">What Float does</div>
-      <h2>Underwriting, end to end.</h2>
-      <p>Float handles the work of deciding how much credit an agent should have — and keeps deciding as conditions change.</p>
+    <div class="reveal">
+      <h2>Credit before cash flow arrives.</h2>
+      <p>Float is in private beta with a small group of agents and operators.</p>
+      <div class="cta-row">
+        <form class="form" id="cta-form" onsubmit="return submitWaitlist(event,'cta')">
+          <input type="email" placeholder="you@company.com" id="cta-input" autocomplete="email" aria-label="Email address" />
+          <button type="submit" class="btn btn-primary">Join the waitlist</button>
+        </form>
+        <a class="btn btn-ghost" href="mailto:hello@float.builders">Talk to us</a>
+      </div>
+      <div class="form-success" id="cta-success">✓ You're on the list — we'll be in touch soon.</div>
     </div>
-    <div class="do-grid">
-      <div class="do-item reveal">
-        <div class="do-num">01</div>
-        <h3>Collects the right signals</h3>
-        <p>The inputs that actually predict repayment, gathered from the agent and its operator.</p>
-      </div>
-      <div class="do-item reveal" style="transition-delay:.05s">
-        <div class="do-num">02</div>
-        <h3>Verifies collateral</h3>
-        <p>Confirms what's backing the line before any credit is extended.</p>
-      </div>
-      <div class="do-item reveal" style="transition-delay:.1s">
-        <div class="do-num">03</div>
-        <h3>Sizes the limit</h3>
-        <p>Sets a limit against verified collateral and the signals behind it.</p>
-      </div>
-      <div class="do-item reveal">
-        <div class="do-num">04</div>
-        <h3>Flags risk early</h3>
-        <p>Monitors positions continuously, so exposure surfaces before it becomes a loss.</p>
-      </div>
-      <div class="do-item reveal" style="transition-delay:.05s">
-        <div class="do-num">05</div>
-        <h3>Routes edge cases to a human</h3>
-        <p>When a decision sits outside the model, a person reviews it. No silent approvals.</p>
-      </div>
-      <div class="do-item reveal" style="transition-delay:.1s">
-        <div class="do-num">06</div>
-        <h3>Learns from repayment behavior</h3>
-        <p>Every cycle of repayment feeds back into how the next limit gets sized.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- MONITORING (dark) -->
-<section id="monitoring">
-  <div class="approach-wrap">
-    <div class="dark dark-round sec-pad" style="padding-left:0;padding-right:0;">
-      <div class="wrap">
-        <div class="figure">
-          <div class="figure-copy reveal">
-            <div class="eyebrow">Monitoring</div>
-            <h2>Underwriting doesn't stop at origination.</h2>
-            <p>A limit that was right at signing can be wrong a week later. Float watches collateral and utilization continuously, so exposure surfaces while it's still a position — not after it's a loss.</p>
-            <p>When something sits outside the model, it doesn't get silently approved or silently declined. It gets routed to a person.</p>
-            <div class="figure-note">In the panel, <b>agent-c518</b> is drawn to 89% against the thinnest collateral in the book. That's the row a human looks at.</div>
-          </div>
-          <div class="card reveal" style="transition-delay:.1s">
-            <div class="win-bar">
-              <span class="win-dot"></span><span class="win-dot"></span><span class="win-dot"></span>
-              <span class="win-path">float.builders/portfolio</span>
-              <span class="tag win-tag">Illustrative</span>
-            </div>
-            <div class="stat-row c3">
-              <div class="stat">
-                <div class="stat-label">Collateral verified</div>
-                <div class="stat-val">$48,500</div>
-                <div class="stat-sub">across 4 agents</div>
-              </div>
-              <div class="stat">
-                <div class="stat-label">Limits extended</div>
-                <div class="stat-val">$33,950</div>
-                <div class="stat-sub">70% advance rate</div>
-              </div>
-              <div class="stat">
-                <div class="stat-label">Flagged</div>
-                <div class="stat-val">1</div>
-                <div class="stat-sub">routed for review</div>
-              </div>
-            </div>
-            <div class="card-scroll">
-              <table class="tbl">
-                <thead>
-                  <tr>
-                    <th>Agent</th>
-                    <th>Collateral</th>
-                    <th>Limit</th>
-                    <th>Utilization</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="agent">agent-7f2c</td>
-                    <td class="num">$12,000</td>
-                    <td class="num">$8,400</td>
-                    <td><div class="util"><div class="util-track"><div class="util-fill" data-w="37%"></div></div><span class="num">37%</span></div></td>
-                    <td><span class="pill pill-ok">On track</span></td>
-                  </tr>
-                  <tr>
-                    <td class="agent">agent-3a91</td>
-                    <td class="num">$4,500</td>
-                    <td class="num">$3,150</td>
-                    <td><div class="util"><div class="util-track"><div class="util-fill" data-w="62%"></div></div><span class="num">62%</span></div></td>
-                    <td><span class="pill pill-ok">On track</span></td>
-                  </tr>
-                  <tr>
-                    <td class="agent">agent-b204</td>
-                    <td class="num">$30,000</td>
-                    <td class="num">$21,000</td>
-                    <td><div class="util"><div class="util-track"><div class="util-fill" data-w="18%"></div></div><span class="num">18%</span></div></td>
-                    <td><span class="pill pill-ok">On track</span></td>
-                  </tr>
-                  <tr class="flagged">
-                    <td class="agent">agent-c518</td>
-                    <td class="num">$2,000</td>
-                    <td class="num">$1,400</td>
-                    <td><div class="util"><div class="util-track"><div class="util-fill hot" data-w="89%"></div></div><span class="num">89%</span></div></td>
-                    <td><span class="pill pill-watch">In review</span></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- REPUTATION -->
-<section class="sec-pad" id="reputation">
-  <div class="wrap">
-    <div class="figure">
-      <div class="figure-copy reveal">
-        <div class="eyebrow">Over time</div>
-        <h2>Reputation is earned, then it compounds.</h2>
-        <p>Repayment behavior is a signal that only exists after the fact. No agent starts with it, and it can't be bought — which is exactly what makes it worth underwriting on.</p>
-        <p>As history accumulates, Float can lend further against the same collateral. The advance rate moves, not the requirement to post.</p>
-        <div class="figure-note">This is the path from collateral-first to something sharper. It starts conservative on purpose.</div>
-      </div>
-      <div class="card reveal" style="transition-delay:.1s">
-        <div class="win-bar">
-          <span class="win-dot"></span><span class="win-dot"></span><span class="win-dot"></span>
-          <span class="win-path">float.builders/agents/7f2c/history</span>
-          <span class="tag win-tag">Illustrative</span>
-        </div>
-        <div class="stat-row c3">
-          <div class="stat">
-            <div class="stat-label">Advance rate</div>
-            <div class="stat-val">80<span class="unit pct">%</span></div>
-            <div class="stat-sub pos">up from 70%</div>
-          </div>
-          <div class="stat">
-            <div class="stat-label">Collateral posted</div>
-            <div class="stat-val">$12,000</div>
-            <div class="stat-sub">unchanged</div>
-          </div>
-          <div class="stat">
-            <div class="stat-label">Limit today</div>
-            <div class="stat-val">$9,600</div>
-            <div class="stat-sub pos">+$1,200 earned</div>
-          </div>
-        </div>
-        <div class="chart-wrap">
-          <svg class="chart" viewBox="0 0 440 160" role="img" aria-label="Advance rate rising in steps from 70 percent to 80 percent across eighteen repayment cycles, with collateral held constant">
-            <line class="grid-line" x1="38" y1="26"  x2="430" y2="26" />
-            <line class="grid-line" x1="38" y1="70"  x2="430" y2="70" />
-            <line class="grid-line" x1="38" y1="112" x2="430" y2="112" />
-            <text class="lbl" x="2" y="29">80%</text>
-            <text class="lbl" x="2" y="73">75%</text>
-            <text class="lbl" x="2" y="115">70%</text>
-            <path class="step-area" d="M38,112 L168,112 L168,70 L299,70 L299,26 L430,26 L430,126 L38,126 Z" />
-            <polyline class="step-line" points="38,112 168,112 168,70 299,70 299,26 430,26" />
-            <line class="axis" x1="38" y1="126" x2="430" y2="126" />
-            <circle class="dot" cx="168" cy="70" r="4" />
-            <circle class="dot" cx="299" cy="26" r="4" />
-            <text class="lbl" x="34" y="142">cycle 1</text>
-            <text class="lbl" x="162" y="142">6</text>
-            <text class="lbl" x="292" y="142">12</text>
-            <text class="lbl" x="421" y="142">18</text>
-          </svg>
-        </div>
-        <div class="cycles-block">
-          <div class="cycles">
-            <span class="tick on"></span><span class="tick on"></span><span class="tick on"></span>
-            <span class="tick on"></span><span class="tick on"></span><span class="tick on"></span>
-            <span class="tick on"></span><span class="tick on"></span><span class="tick on"></span>
-            <span class="tick"></span><span class="tick"></span><span class="tick"></span>
-          </div>
-          <div class="cycles-note"><span>9 cycles repaid on time</span><span>3 remaining to next step</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WHY FLOAT -->
-<section class="sec-pad" id="why">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="eyebrow">Why Float</div>
-      <h2>A narrow wedge, on purpose.</h2>
-      <p>Credit for agents is an underwriting problem before it's a product problem. That's the part Float is building.</p>
-    </div>
-    <div class="diff-list">
-      <div class="diff-row reveal">
-        <div class="diff-idx">01</div>
-        <h3>Collateral first</h3>
-        <p>Float doesn't extend credit on optimism. V1 is backed by verified collateral, which makes the risk legible from day one.</p>
-      </div>
-      <div class="diff-row reveal">
-        <div class="diff-idx">02</div>
-        <h3>Reputation grows over time</h3>
-        <p>Track record is earned, not granted. As repayment history accumulates, underwriting gets sharper and limits follow.</p>
-      </div>
-      <div class="diff-row reveal">
-        <div class="diff-idx">03</div>
-        <h3>Built for agents and crypto-native operators</h3>
-        <p>Designed for how agents actually transact — not a traditional credit product with an API bolted onto the side.</p>
-      </div>
-      <div class="diff-row reveal">
-        <div class="diff-idx">04</div>
-        <h3>Underwriting is the wedge</h3>
-        <p>Not a broad fintech platform. Float is building the layer that decides who gets credit, how much, and on what terms.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA (dark) -->
-<section class="dark cta">
-  <div class="cta-inner reveal">
-    <h2>Credit before cash flow arrives.</h2>
-    <p>Float is in private beta, working with a small group of agents and operators.</p>
-    <div class="cta-row">
-      <form class="form" id="cta-form" onsubmit="return submitWaitlist(event,'cta')">
-        <input type="email" placeholder="you@company.com" id="cta-input" autocomplete="email" aria-label="Email address" />
-        <button type="submit" class="btn btn-primary">Join the waitlist</button>
-      </form>
-      <a class="btn btn-ghost" href="mailto:hello@float.builders">Talk to us</a>
-    </div>
-    <div class="form-success" id="cta-success">✓ You're on the list — we'll be in touch soon.</div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
+  <div class="wrap">
+    <div class="footer-inner">
       <div class="footer-logo">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
           <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
           <line x1="8.8" y1="8.8" x2="5.5" y2="5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -1011,29 +564,14 @@
         </svg>
         FLOAT
       </div>
-      <p class="footer-tag">The underwriting layer for agent credit. Collateral-first, for crypto-native agents and operators.</p>
-    </div>
-    <div class="footer-cols">
-      <div class="footer-col">
-        <h4>Product</h4>
-        <a href="#sizing">Sizing</a>
-        <a href="#what">What Float does</a>
-        <a href="#monitoring">Monitoring</a>
-        <a href="#reputation">Over time</a>
-        <a href="#why">Why Float</a>
-      </div>
-      <div class="footer-col">
-        <h4>Company</h4>
-        <a href="#" onclick="focusWaitlist('cta');return false;">Waitlist</a>
+      <div class="footer-links">
+        <a href="#how">How it works</a>
         <a href="mailto:hello@float.builders">Contact</a>
         <a href="/legal/privacy.html">Privacy</a>
         <a href="/legal/terms.html">Terms</a>
       </div>
+      <span class="footer-copy">© 2026 Float</span>
     </div>
-  </div>
-  <div class="footer-bottom">
-    <span class="site">float.builders</span>
-    <span class="footer-copy">© 2026 Float. All rights reserved.</span>
   </div>
 </footer>
 
@@ -1056,12 +594,6 @@
   });
 
   // waitlist
-  function focusWaitlist(src) {
-    const target = src === 'cta' ? '.cta' : '.hero';
-    document.querySelector(target).scrollIntoView({ behavior: 'smooth' });
-    setTimeout(() => document.getElementById(src === 'cta' ? 'cta-input' : 'hero-email').focus(), 500);
-  }
-
   async function submitWaitlist(e, src) {
     if (e) e.preventDefault();
     const id = src === 'hero' ? 'hero-email' : 'cta-input';
@@ -1090,8 +622,8 @@
   }, { threshold: 0.14, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.reveal').forEach(el => revealIO.observe(el));
 
-  // Grow the bars when their card scrolls into view.
-  // Observe the card, not the bars: a bar starts at width:0, and a
+  // Grow the bars when the panel scrolls into view.
+  // Observe the panel, not the bars: a bar starts at width:0, and a
   // zero-area target is not reliably reported by IntersectionObserver.
   // Fill by [data-w] rather than class name so renaming a bar can't
   // silently orphan it here.
@@ -1104,7 +636,7 @@
         if (e.isIntersecting) { fillBars(e.target); barIO.unobserve(e.target); }
       });
     }, { threshold: 0.15 });
-    document.querySelectorAll('.card').forEach(el => barIO.observe(el));
+    document.querySelectorAll('.panel').forEach(el => barIO.observe(el));
   }
 </script>
 </body>
