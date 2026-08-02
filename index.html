@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#F0ECE6" />
+  <meta name="robots" content="noindex, nofollow" />
   <title>Float — The underwriting layer for agent credit</title>
   <meta name="description" content="Float is building the underwriting layer for agent credit. Post collateral, draw on a secured line, earn better terms as repayment history builds." />
   <!-- Open Graph -->
@@ -62,8 +63,6 @@
       --fig-glass:  rgba(27, 25, 23, 0.86);
       /* The status chip sits much closer to the page than the figure.
          #6C6966 is the flat equivalent, for the no-backdrop-filter path. */
-      --chip-glass: rgba(27, 25, 23, 0.62);
-      --chip-flat:  #6C6966;
       --fig-rim:    rgba(255, 255, 255, 0.14);
       --fig-hair:   rgba(255, 255, 255, 0.10);
       --fig-groove: rgba(0, 0, 0, 0.34);
@@ -126,7 +125,6 @@
     @media (prefers-reduced-motion: reduce) {
       .reveal { opacity: 1 !important; }
       .fill, .spark-bar { transition: none !important; }
-      .status .dot { animation: none; }
       html { scroll-behavior: auto; }
     }
 
@@ -153,13 +151,11 @@
     }
     .btn-sm { height: 34px; padding: 0 15px; font-size: 13.5px; }
     .btn-primary { background: var(--ink); color: var(--cream); }
-    .btn-ghost { background: transparent; color: var(--ink); border-color: var(--line); }
     /* Hover only where something can actually hover. On touch, :hover
        latches after a tap and leaves the control looking stuck until
        the next tap lands elsewhere. :active is the touch equivalent. */
     @media (hover: hover) {
       .btn-primary:hover { opacity: 0.86; }
-      .btn-ghost:hover { border-color: var(--ink-mute); }
     }
     .btn:active { opacity: 0.86; }
 
@@ -196,42 +192,6 @@
 
     /* ─── HERO ─── */
     .hero { padding: 210px 0 150px; }
-    /* The chip stays dark only because the lime dot needs a ground — on
-       bare cream the dot measures 1.06:1 and disappears. So it is lifted
-       as close to the page as that allows and no closer: no rim, no
-       shadow, no sheen, since a bevelled edge and a highlight are what
-       made it read as a raised 3D object. Flat translucency and a blur,
-       nothing more. 0.62 is the ceiling — above it the label drops under
-       4.5:1 against the cream showing through. */
-    .status {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 13px 6px 11px;
-      border-radius: 100px;
-      background: var(--chip-glass);
-      -webkit-backdrop-filter: blur(14px) saturate(1.4);
-      backdrop-filter: blur(14px) saturate(1.4);
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--fig-text);
-      margin-bottom: 38px;
-    }
-    .status .dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--lime);
-      animation: dot-pulse 3s ease-in-out infinite;
-    }
-    /* Slow enough to read as a live indicator rather than a flashing
-       alert. Eased at both ends so it breathes instead of ticking, and it
-       never reaches 0 — a dot that fully disappears looks broken. */
-    @keyframes dot-pulse {
-      0%, 100% { opacity: 1; }
-      50%      { opacity: 0.16; }
-    }
     .hero h1 {
       font-size: clamp(40px, 6.4vw, 76px);
       font-weight: 600;
@@ -249,44 +209,6 @@
 
     /* ─── WAITLIST FORM ─── */
     .cta-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-    .form { display: flex; gap: 8px; width: 100%; max-width: 400px; }
-    .form input {
-      flex: 1;
-      /* An input's automatic minimum size is its ~20ch intrinsic width,
-         so flex: 1 alone will not let it shrink and the row overflows
-         the page instead. */
-      min-width: 0;
-      height: var(--control-h);
-      padding: 0 15px;
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      color: var(--ink);
-      font-family: var(--sans);
-      font-size: 15px;
-      outline: none;
-      transition: border-color 0.15s, box-shadow 0.15s;
-    }
-    .form input::placeholder { color: var(--ink-mute); }
-    .form input:focus {
-      border-color: var(--ink-mute);
-      box-shadow: 0 0 0 3px rgba(133,125,114,0.16);
-    }
-    /* Under 16px, iOS Safari zooms the viewport when the field takes
-       focus and never zooms back out — the visitor is left scrolling a
-       magnified page. Keyed to the pointer, not the width, so tablets
-       that clear the width breakpoints are still covered. */
-    @media (pointer: coarse) {
-      .form input { font-size: 16px; }
-    }
-    .form-success {
-      display: none;
-      align-items: center;
-      gap: 8px;
-      font-size: 15px;
-      color: var(--ink);
-      padding: 12px 0;
-    }
 
     /* ─── SECTIONS ─── */
     .sec { padding: 150px 0; border-top: 1px solid var(--line); }
@@ -393,15 +315,13 @@
        support, or the viewer has asked for less transparency. */
     @supports not ((backdrop-filter: blur(2px)) or (-webkit-backdrop-filter: blur(2px))) {
       .panel { background: var(--fig-bg); }
-      .status { background: var(--chip-flat); }
     }
     @media (prefers-reduced-transparency: reduce) {
-      .panel, .status {
+      .panel {
         -webkit-backdrop-filter: none;
         backdrop-filter: none;
       }
       .panel { background: var(--fig-bg); }
-      .status { background: var(--chip-flat); }
       .fig-glow { display: none; }
     }
 
@@ -528,6 +448,38 @@
       color: var(--fig-mute);
     }
 
+    /* ─── THE MODEL ─── */
+    /* Deliberately asymmetric: Float's column carries four items to the
+       partner's two, and the copy is set in full ink against the
+       partner's muted grey. The imbalance is the argument — the work
+       that matters is on the left, and the balance sheet is not. */
+    .split {
+      margin-top: 56px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-content: start;
+    }
+    .col + .col { border-left: 1px solid var(--line); padding-left: 44px; }
+    .col-label {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      margin-bottom: 20px;
+    }
+    .col-label.is-float { color: var(--ink); }
+    .col ul { list-style: none; }
+    .col li {
+      font-size: 16px;
+      line-height: 1.5;
+      color: var(--ink-mute);
+      padding: 13px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .col li:first-child { border-top: 1px solid var(--line); }
+    .col.is-float li { color: var(--ink); font-weight: 500; }
+
     /* ─── CTA ─── */
     .cta { padding: 150px 0 160px; border-top: 1px solid var(--line); }
     .cta h2 {
@@ -569,6 +521,19 @@
       .footer-links a:hover { color: var(--ink); }
     }
     .footer-copy { font-family: var(--mono); font-size: 11.5px; color: var(--ink-mute); }
+      /* The one line on the page that states what this is. Quiet — mono,
+         footer scale — but on its own row with a rule above it, so it reads
+         as a statement rather than legal furniture tucked beside a
+         copyright. --ink-soft, not --ink-mute: it has to survive a glance. */
+      .footer-status {
+        margin-top: 26px;
+        padding-top: 22px;
+        border-top: 1px solid var(--line);
+        font-family: var(--mono);
+        font-size: 12px;
+        line-height: 1.6;
+        color: var(--ink-soft);
+      }
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 860px) {
@@ -612,7 +577,6 @@
         margin-bottom: 22px;
       }
       .hero p { margin-bottom: 30px; max-width: none; }
-      .status { margin-bottom: 24px; }
 
       /* Four lines of headline on a phone is where an unbalanced last
          line starts to look like a mistake. */
@@ -643,26 +607,9 @@
       .step p  { grid-column: 2; grid-row: 2; }
       .steps-note { margin-top: 20px; }
 
-      .form { max-width: none; }
-      .cta-row { display: block; }
-      /* "Talk to us" is already in the nav and the footer. As a third
-         full-width block it competes with the waitlist for the one
-         decision this page is asking for; as a link it stays available
-         without pretending to be equal. */
-      .cta-row .btn-ghost {
-        width: auto;
-        height: auto;
-        min-height: 44px;
-        margin-top: 14px;
-        padding: 0;
-        border: 0;
-        background: none;
-        color: var(--ink-soft);
-        justify-content: flex-start;
-        text-decoration: underline;
-        text-underline-offset: 4px;
-        text-decoration-color: var(--line);
-      }
+      .split { grid-template-columns: 1fr; margin-top: 40px; }
+      .col + .col { border-left: 0; padding-left: 0; padding-top: 34px; }
+
 
       .panel-head { padding: 13px 20px; }
       .zone { padding: 20px; gap: 12px; }
@@ -679,21 +626,6 @@
          each one gets a full thumb-height row of its own. */
       .footer-links { flex-direction: column; gap: 0; width: 100%; }
       .footer-links a { display: block; padding: 11px 0; font-size: 15px; }
-    }
-
-    /* The email row runs out of room before the page does: the input's
-       intrinsic width plus a nowrap "Join the waitlist" wants ~370px,
-       which a 375px phone cannot give once the gutters are taken. Below
-       this it becomes two full-width controls rather than a field
-       squeezed to a few visible characters. */
-    @media (max-width: 480px) {
-      .form { flex-direction: column; }
-      .form .btn { width: 100%; }
-      /* flex: 1 has to come off with the direction change. Once the main
-         axis is vertical it resolves to flex-basis: 0% on the *height*,
-         which outranks height: var(--control-h) and collapses the field
-         to its content minimum. */
-      .form input { flex: 0 0 auto; width: 100%; }
     }
 
     /* Small phones: the panel is the tallest thing on the page, so its
@@ -721,7 +653,7 @@
     </svg>
     FLOAT
   </a>
-  <a class="btn btn-primary btn-sm" href="mailto:hello@float.builders">Talk to us</a>
+  <a class="btn btn-primary btn-sm" href="mailto:hello@float.builders">Get in touch</a>
 </nav>
 
 <span id="top"></span>
@@ -729,18 +661,12 @@
 <!-- HERO -->
 <section class="hero">
   <div class="wrap">
-    <div class="status reveal"><span class="dot"></span> Private beta</div>
     <h1 class="reveal">Float is building the underwriting layer for agent credit.</h1>
     <p class="reveal">Secured credit for agents and their operators. Better terms as repayment history builds.</p>
     <div class="reveal">
       <div class="cta-row">
-        <form class="form" id="hero-form" onsubmit="return submitWaitlist(event,'hero')">
-          <input type="email" placeholder="you@company.com" id="hero-email" autocomplete="email" aria-label="Email address" />
-          <button type="submit" class="btn btn-primary">Join the waitlist</button>
-        </form>
-        <a class="btn btn-ghost" href="mailto:hello@float.builders">Talk to us</a>
+        <a class="btn btn-primary" href="mailto:hello@float.builders">Get in touch</a>
       </div>
-      <div class="form-success" id="hero-success">✓ You're on the list — we'll be in touch soon.</div>
     </div>
   </div>
 </section>
@@ -860,20 +786,46 @@
   </div>
 </section>
 
+<!-- THE MODEL -->
+<section class="sec" id="model">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">The model</div>
+      <h2>Float underwrites. It isn't the bank.</h2>
+      <p class="lede">Float decides who gets credit and on what terms, then watches the position and services it. The collateral and the capital sit with a partner.</p>
+    </div>
+    <div class="split reveal">
+      <div class="col is-float">
+        <div class="col-label is-float">Float</div>
+        <ul>
+          <li>Sizes the limit and sets the terms</li>
+          <li>Verifies the collateral</li>
+          <li>Monitors the exposure</li>
+          <li>Services the line and graduation</li>
+          <li>Improves the model from what it learns</li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="col-label">Partner</div>
+        <ul>
+          <li>Holds the collateral</li>
+          <li>Supplies the capital</li>
+        </ul>
+      </div>
+    </div>
+    <p class="steps-note reveal">Float is paid for the underwriting, not the spread. Fees cover setup, servicing and monitoring — charged for a decision, not interest on a balance, so a bigger line does not pay Float more.</p>
+  </div>
+</section>
+
 <!-- CTA -->
 <section class="cta">
   <div class="wrap">
     <div class="reveal">
       <h2>Credit before cash flow arrives.</h2>
-      <p>Float is in private beta with a small group of agents and operators.</p>
+      <p>I'm trying to understand whether this is a real problem before building further. If you operate agents, I'd like to talk.</p>
       <div class="cta-row">
-        <form class="form" id="cta-form" onsubmit="return submitWaitlist(event,'cta')">
-          <input type="email" placeholder="you@company.com" id="cta-input" autocomplete="email" aria-label="Email address" />
-          <button type="submit" class="btn btn-primary">Join the waitlist</button>
-        </form>
-        <a class="btn btn-ghost" href="mailto:hello@float.builders">Talk to us</a>
+        <a class="btn btn-primary" href="mailto:hello@float.builders">Get in touch</a>
       </div>
-      <div class="form-success" id="cta-success">✓ You're on the list — we'll be in touch soon.</div>
     </div>
   </div>
 </section>
@@ -895,12 +847,14 @@
       </div>
       <div class="footer-links">
         <a href="#how">How it works</a>
+        <a href="#model">The model</a>
         <a href="mailto:hello@float.builders">Contact</a>
         <a href="/legal/privacy.html">Privacy</a>
         <a href="/legal/terms.html">Terms</a>
       </div>
       <span class="footer-copy">© 2026 Float</span>
     </div>
+      <p class="footer-status">An independent research project. Not currently offering credit.</p>
   </div>
 </footer>
 
@@ -910,29 +864,6 @@
   const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 24);
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
-
-  // waitlist
-  async function submitWaitlist(e, src) {
-    if (e) e.preventDefault();
-    const id = src === 'hero' ? 'hero-email' : 'cta-input';
-    const input = document.getElementById(id);
-    const email = input.value.trim();
-    if (!email || !email.includes('@')) {
-      input.style.borderColor = '#E05F5F';
-      input.focus();
-      return false;
-    }
-    try {
-      await fetch('https://app.loops.so/api/newsletter-form/cmqxd1hu504yq0jyu9jjd637r', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: 'userGroup=&mailingLists=&email=' + encodeURIComponent(email)
-      });
-    } catch (err) {}
-    document.getElementById(src + '-form').style.display = 'none';
-    document.getElementById(src + '-success').style.display = 'flex';
-    return false;
-  }
 
   // reveal on scroll
   const revealIO = new IntersectionObserver((entries) => {
