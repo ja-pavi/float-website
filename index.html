@@ -63,6 +63,8 @@
       --fig-glass:  rgba(27, 25, 23, 0.86);
       /* The status chip sits much closer to the page than the figure.
          #6C6966 is the flat equivalent, for the no-backdrop-filter path. */
+        --chip-glass: rgba(27, 25, 23, 0.62);
+        --chip-flat:  #6C6966;
       --fig-rim:    rgba(255, 255, 255, 0.14);
       --fig-hair:   rgba(255, 255, 255, 0.10);
       --fig-groove: rgba(0, 0, 0, 0.34);
@@ -125,6 +127,7 @@
     @media (prefers-reduced-motion: reduce) {
       .reveal { opacity: 1 !important; }
       .fill, .spark-bar { transition: none !important; }
+        .status .dot { animation: none; }
       html { scroll-behavior: auto; }
     }
 
@@ -192,6 +195,42 @@
 
     /* ─── HERO ─── */
     .hero { padding: 210px 0 150px; }
+    /* The chip stays dark only because the lime dot needs a ground — on
+       bare cream the dot measures 1.06:1 and disappears. So it is lifted
+       as close to the page as that allows and no closer: no rim, no
+       shadow, no sheen, since a bevelled edge and a highlight are what
+       made it read as a raised 3D object. Flat translucency and a blur,
+       nothing more. 0.62 is the ceiling — above it the label drops under
+       4.5:1 against the cream showing through. */
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 13px 6px 11px;
+      border-radius: 100px;
+      background: var(--chip-glass);
+      -webkit-backdrop-filter: blur(14px) saturate(1.4);
+      backdrop-filter: blur(14px) saturate(1.4);
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--fig-text);
+      margin-bottom: 38px;
+    }
+    .status .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--lime);
+      animation: dot-pulse 3s ease-in-out infinite;
+    }
+    /* Slow enough to read as a live indicator rather than a flashing
+       alert. Eased at both ends so it breathes instead of ticking, and it
+       never reaches 0 — a dot that fully disappears looks broken. */
+    @keyframes dot-pulse {
+      0%, 100% { opacity: 1; }
+      50%      { opacity: 0.16; }
+    }
     .hero h1 {
       font-size: clamp(40px, 6.4vw, 76px);
       font-weight: 600;
@@ -315,13 +354,15 @@
        support, or the viewer has asked for less transparency. */
     @supports not ((backdrop-filter: blur(2px)) or (-webkit-backdrop-filter: blur(2px))) {
       .panel { background: var(--fig-bg); }
+      .status { background: var(--chip-flat); }
     }
     @media (prefers-reduced-transparency: reduce) {
-      .panel {
+      .panel, .status {
         -webkit-backdrop-filter: none;
         backdrop-filter: none;
       }
       .panel { background: var(--fig-bg); }
+      .status { background: var(--chip-flat); }
       .fig-glow { display: none; }
     }
 
@@ -577,6 +618,7 @@
         margin-bottom: 22px;
       }
       .hero p { margin-bottom: 30px; max-width: none; }
+      .status { margin-bottom: 24px; }
 
       /* Four lines of headline on a phone is where an unbalanced last
          line starts to look like a mistake. */
@@ -661,6 +703,7 @@
 <!-- HERO -->
 <section class="hero">
   <div class="wrap">
+    <div class="status reveal"><span class="dot"></span> Selecting design partners</div>
     <h1 class="reveal">Float is building the underwriting layer for agent credit.</h1>
     <p class="reveal">Secured credit for agents and their operators. Better terms as repayment history builds.</p>
     <div class="reveal">
